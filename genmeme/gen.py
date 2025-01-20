@@ -1,21 +1,21 @@
 import asyncio
 import fire  # type: ignore
 import random
-import requests
 import json
 import time
 from typing import List, Dict, Any, Optional
 
 from jinja2 import Template
 
+from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH
 from genmeme.anthropic_wrapper import anthropic_completion
 
 # MEMEGEN_HOST = "https://api.memegen.link"
 MEMEGEN_HOST = "http://localhost:8082"
-ALL_MEME_TEMPLATES = requests.get(f"{MEMEGEN_HOST}/templates").json()
+ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
-DEFAULT_PROMPT_NAME = "genmeme/prompts/gen.jinja"
-DEFAULT_TEMPLATES_COUNT = 3
+DEFAULT_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
+DEFAULT_TEMPLATES_COUNT = 4
 
 
 async def get_memegen_meme(
@@ -44,17 +44,22 @@ async def get_memegen_meme(
     image_url: Optional[str] = response.get("best_image_url")
     assert image_url
     image_url += "?font=impact&watermark="
-    return image_url
+    final_url: str = MEMEGEN_HOST + image_url
+    return final_url
 
 
 async def gen_image_url(
     query: str,
-    prompt_path: str = DEFAULT_PROMPT_NAME,
+    prompt_path: str = DEFAULT_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     templates_count: int = DEFAULT_TEMPLATES_COUNT,
 ) -> str:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
+    for template in all_templates:
+        template["example"]["url"] = template["example"]["url"].replace(MEMEGEN_HOST, "")
+        template["example"]["url"] = template["example"]["url"].replace("http://localhost:5000", "")
+        assert not template["example"]["url"].startswith("http"), template["example"]["url"]
     image_url = await get_memegen_meme(
         query=query,
         all_templates=all_templates,
@@ -62,15 +67,13 @@ async def gen_image_url(
         model_name=model_name,
         templates_count=templates_count
     )
-    if "http://localhost:5000" in image_url:
-        image_url = image_url.replace("http://localhost:5000", MEMEGEN_HOST)
     print(image_url)
     return image_url
 
 
 def gen_image_url_sync(
     query: str,
-    prompt_path: str = DEFAULT_PROMPT_NAME,
+    prompt_path: str = DEFAULT_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     templates_count: int = DEFAULT_TEMPLATES_COUNT,
 ) -> str:

@@ -1,5 +1,6 @@
 import os
 import uuid
+import time
 from typing import Optional, Literal, Dict, Any
 from datetime import datetime
 
@@ -55,15 +56,20 @@ async def download_file(url: str, file_path: str) -> bool:
 
 @APP.post("/api/v1/predict", response_model=PredictResponse)
 async def predict(request: PredictRequest, req: Request) -> PredictResponse:
+    start_time = time.time()
+
     image_url = await gen_image_url(request.prompt)
 
     file_name = f"{uuid.uuid4()}.jpg"
     file_path = os.path.join(STORAGE_PATH, file_name)
     success = await download_file(image_url, file_path)
-    if not success:
-        print("Download failed!")
+    assert success
     base_url = get_base_url(req)
     public_url = f"{base_url}/output/{file_name}"
+
+    total_time = time.time() - start_time
+    print(f"Total processing time: {total_time:.3f}s")
+
     return PredictResponse(
         type="image",
         url=public_url

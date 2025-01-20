@@ -1,10 +1,9 @@
 Запрос:
-
+###
 {{query}}
+###
 
------
-
-Meme templates:
+Шаблоны мемов:
 {% for template in meme_templates %}
 ###
 Name: {{template.name}}
@@ -12,8 +11,6 @@ Example texts: {{template.example.text}}
 Example url: {{template.example.url}}
 {% endfor %}
 ###
-
------
 
 Для заданного запроса и каждого шаблона выше сделай смешной мем с помощью memegen.
 Нельзя использовать стандартные подписи, обязательно адаптируй их под запрос.
