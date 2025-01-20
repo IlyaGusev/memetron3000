@@ -1,26 +1,24 @@
-import asyncio
 import logging
 import time
 import os
-import json
-import inspect
-from typing import Optional
+from typing import Optional, Any, List, Dict, cast
 
 from anthropic import AsyncAnthropic, APIError
+from anthropic.types import MessageParam
 
 DEFAULT_MODEL = "claude-3-5-sonnet-20241022"
 DEFAULT_SLEEP_TIME = 2
 
 
 async def anthropic_completion(
-    messages,
+    messages: List[Dict[str, Any]],
     model_name: str = DEFAULT_MODEL,
     temperature: float = 1.0,
     sleep_time: int = DEFAULT_SLEEP_TIME,
     api_key: Optional[str] = None,
     max_tokens: int = 2048,
-    **kwargs,
-):
+    **kwargs: Any,
+) -> str:
     if not api_key:
         api_key = os.environ.get("ANTHROPIC_API_KEY", None)
 
@@ -29,12 +27,14 @@ async def anthropic_completion(
         system_message = messages[0]["content"]
         messages = messages[1:]
 
+    typed_messages = [cast(MessageParam, m) for m in messages]
+
     while True:
         try:
             client = AsyncAnthropic(api_key=api_key)
             completion = await client.messages.create(
                 system=system_message,
-                messages=messages,
+                messages=typed_messages,
                 model=model_name,
                 max_tokens=max_tokens,
                 temperature=temperature,
@@ -44,28 +44,5 @@ async def anthropic_completion(
         except APIError as e:
             logging.warning(f"Anthropic error: {e}.")
             time.sleep(sleep_time)
-    return completion.content[0].text
-
-
-def anthropic_tokenize(text: str, api_key: Optional[str] = None):
-    client = Anthropic(api_key)
-    tokenizer = client.get_tokenizer()
-    return tokenizer.encode(text)
-
-
-def anthropic_list_models():
-    models = (
-        inspect.signature(Anthropic().messages.create).parameters["model"].annotation
-    )
-    models = models[models.find("Literal") + len("Literal"): -1]
-    models = models.replace("'", '"')
-    models = json.loads(models)
-    return models
-
-
-def anthropic_get_key(model_settings):
-    env_key = os.getenv("ANTHROPIC_API_KEY", None)
-    local_key = model_settings.anthropic_api_key
-    if local_key:
-        return local_key
-    return env_key
+    content: str = completion.content[0].text
+    return content

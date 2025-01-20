@@ -1,16 +1,16 @@
 import asyncio
-import fire
+import fire  # type: ignore
 import random
 import requests
 import json
 import time
-from datetime import datetime
+from typing import List, Dict, Any, Optional
 
 from jinja2 import Template
 
 from genmeme.anthropic_wrapper import anthropic_completion
 
-#MEMEGEN_HOST = "https://api.memegen.link"
+# MEMEGEN_HOST = "https://api.memegen.link"
 MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = requests.get(f"{MEMEGEN_HOST}/templates").json()
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
@@ -20,11 +20,11 @@ DEFAULT_TEMPLATES_COUNT = 3
 
 async def get_memegen_meme(
     query: str,
-    all_templates,
+    all_templates: List[Dict[str, Any]],
     prompt_path: str,
     model_name: str,
     templates_count: int
-):
+) -> str:
     with open(prompt_path) as f:
         template = Template(f.read())
 
@@ -41,18 +41,18 @@ async def get_memegen_meme(
 
     content = content[content.find("{"):content.rfind("}") + 1]
     response = json.loads(content)
-    image_url = response.get("best_image_url")
+    image_url: Optional[str] = response.get("best_image_url")
     assert image_url
     image_url += "?font=impact&watermark="
     return image_url
 
 
-async def gen(
+async def gen_image_url(
     query: str,
     prompt_path: str = DEFAULT_PROMPT_NAME,
     model_name: str = DEFAULT_MODEL_NAME,
     templates_count: int = DEFAULT_TEMPLATES_COUNT,
-):
+) -> str:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
     image_url = await get_memegen_meme(
@@ -68,13 +68,13 @@ async def gen(
     return image_url
 
 
-def gen_sync(
+def gen_image_url_sync(
     query: str,
     prompt_path: str = DEFAULT_PROMPT_NAME,
     model_name: str = DEFAULT_MODEL_NAME,
     templates_count: int = DEFAULT_TEMPLATES_COUNT,
-):
-    return asyncio.run(gen(
+) -> str:
+    return asyncio.run(gen_image_url(
         query=query,
         prompt_path=prompt_path,
         model_name=model_name,
@@ -83,4 +83,4 @@ def gen_sync(
 
 
 if __name__ == "__main__":
-    fire.Fire(gen_sync)
+    fire.Fire(gen_image_url_sync)

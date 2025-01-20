@@ -1,17 +1,16 @@
 import os
-from typing import Optional, Literal
 import uuid
-import asyncio
+from typing import Optional, Literal, Dict, Any
 from datetime import datetime
 
 import uvicorn
 import aiofiles
 import aiohttp
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 
-from genmeme.gen import gen
+from genmeme.gen import gen_image_url
 
 
 class PredictRequest(BaseModel):
@@ -29,8 +28,6 @@ STORAGE_PATH = "output"
 
 
 def get_base_url(request: Request) -> str:
-    if os.getenv("BASE_URL"):
-        return os.getenv("BASE_URL")
     forwarded_proto = request.headers.get("X-Forwarded-Proto", "http")
     forwarded_host = request.headers.get("X-Forwarded-Host", request.headers.get("Host", "localhost"))
     return f"{forwarded_proto}://{forwarded_host}"
@@ -57,8 +54,8 @@ async def download_file(url: str, file_path: str) -> bool:
 
 
 @APP.post("/api/v1/predict", response_model=PredictResponse)
-async def predict(request: PredictRequest, req: Request):
-    image_url = await gen(request.prompt)
+async def predict(request: PredictRequest, req: Request) -> PredictResponse:
+    image_url = await gen_image_url(request.prompt)
 
     file_name = f"{uuid.uuid4()}.jpg"
     file_path = os.path.join(STORAGE_PATH, file_name)
@@ -74,7 +71,7 @@ async def predict(request: PredictRequest, req: Request):
 
 
 @APP.get("/health")
-async def health_check():
+async def health_check() -> Dict[str, Any]:
     return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
 
 
