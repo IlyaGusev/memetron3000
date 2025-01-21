@@ -1,0 +1,23 @@
+Запрос:
+###
+{{query}}
+###
+
+Шаблоны мемов:
+{% for template in meme_templates %}
+###
+ID: {{loop.index}}
+Name: {{template.name}}
+Example texts: {{template.example.text}}
+Example url: {{template.example.url}}
+{% endfor %}
+###
+
+Верни ID {{selected_templates_count}} шаблонов, которые наиболее подходят запросу и имеют наибольший потенциал для создания смешного мема по этому запросу.
+Сначала возвращай ID наиболее подходящих и приоритетных шаблонов.
+Верни JSON следующей структуры:
+{
+    "memes": [...]
+}
+Где значение "memes" — это список численных ID.
+Не возращай ничего, кроме этого JSON.

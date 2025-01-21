@@ -194,7 +194,7 @@
                 "Any sound when you're trying to sleep",
                 "Max volume alarm when you have to wake up"
             ],
-            "url": "http://localhost:5000/images/bongo/Any_sound_when_you're_trying_to_sleep/Max_volume_alarm_when_you_have_to_wake_up.gif"
+            "url": "http://localhost:5000/images/bongo/Any_sound_when_you're_trying_to_sleep/Max_volume_alarm_when_you_have_to_wake_up.png"
         },
         "source": "https://knowyourmeme.com/memes/bongo-cat",
         "keywords": [],
@@ -215,7 +215,7 @@
                 "memes",
                 "memes everywhere"
             ],
-            "url": "http://localhost:5000/images/buzz/memes/memes_everywhere.gif"
+            "url": "http://localhost:5000/images/buzz/memes/memes_everywhere.png"
         },
         "source": "https://imgflip.com/memetemplate/X-Everywhere",
         "keywords": [],
@@ -575,7 +575,7 @@
                 "",
                 "this is fine"
             ],
-            "url": "http://localhost:5000/images/fine/_/this_is_fine.gif"
+            "url": "http://localhost:5000/images/fine/_/this_is_fine.png"
         },
         "source": "http://gunshowcomic.com/648",
         "keywords": [],
@@ -596,7 +596,7 @@
                 "not sure if trolling",
                 "or just stupid"
             ],
-            "url": "http://localhost:5000/images/fry/not_sure_if_trolling/or_just_stupid.gif"
+            "url": "http://localhost:5000/images/fry/not_sure_if_trolling/or_just_stupid.png"
         },
         "source": "http://knowyourmeme.com/memes/futurama-fry-not-sure-if",
         "keywords": [
@@ -643,26 +643,6 @@
         "source": "https://knowyourmeme.com/memes/galaxy-brain",
         "keywords": [],
         "_self": "http://localhost:5000/templates/gb"
-    },
-    {
-        "id": "glasses",
-        "name": "Peter Parker's Glasses",
-        "lines": 2,
-        "overlays": 2,
-        "styles": [
-            "default"
-        ],
-        "blank": "http://localhost:5000/images/glasses.png",
-        "example": {
-            "text": [
-                "Virginity is cool, stay pure",
-                "I am utterly incapable of getting laid"
-            ],
-            "url": "http://localhost:5000/images/glasses/Virginity_is_cool,_stay_pure/I_am_utterly_incapable_of_getting_laid.png"
-        },
-        "source": "https://knowyourmeme.com/memes/peter-parkers-glasses",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/glasses"
     },
     {
         "id": "grave",
@@ -1188,7 +1168,7 @@
                 "can't get fired",
                 "if you don't have a job"
             ],
-            "url": "http://localhost:5000/images/rollsafe/can't_get_fired/if_you_don't_have_a_job.gif"
+            "url": "http://localhost:5000/images/rollsafe/can't_get_fired/if_you_don't_have_a_job.png"
         },
         "source": "http://knowyourmeme.com/memes/roll-safe",
         "keywords": [],
