@@ -704,25 +704,6 @@
         "_self": "http://localhost:5000/templates/harold"
     },
     {
-        "id": "headaches",
-        "name": "Types of Headaches",
-        "lines": 1,
-        "overlays": 1,
-        "styles": [
-            "default"
-        ],
-        "blank": "http://localhost:5000/images/headaches.png",
-        "example": {
-            "text": [
-                "Breaking Production"
-            ],
-            "url": "http://localhost:5000/images/headaches/Breaking_Production.png"
-        },
-        "source": "https://knowyourmeme.com/memes/types-of-headaches",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/headaches"
-    },
-    {
         "id": "home",
         "name": "We Have Food at Home",
         "lines": 3,
@@ -800,24 +781,6 @@
         "source": "http://knowyourmeme.com/memes/conspiracy-keanu",
         "keywords": [],
         "_self": "http://localhost:5000/templates/keanu"
-    },
-    {
-        "id": "kombucha",
-        "name": "Kombucha Girl",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/kombucha.png",
-        "example": {
-            "text": [
-                "Trying a thing.",
-                "Trying a thing again."
-            ],
-            "url": "http://localhost:5000/images/kombucha/Trying_a_thing./Trying_a_thing_again..png"
-        },
-        "source": "https://www.buzzfeed.com/daniellaemanuel/woman-trying-kombucha-meme",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/kombucha"
     },
     {
         "id": "leo",
@@ -1470,5 +1433,23 @@
         "source": "http://knowyourmeme.com/memes/condescending-wonka-creepy-wonka",
         "keywords": [],
         "_self": "http://localhost:5000/templates/wonka"
+    },
+    {
+        "id": "chill",
+        "name": "Chill Guy",
+        "lines": 2,
+        "overlays": 0,
+        "styles": [],
+        "blank": "http://localhost:5000/images/chill.jpg",
+        "example": {
+            "text": [
+                "Me when I get a low SAT score but I remember",
+                "I'm a chill guy who low-key doesn't GAF"
+            ],
+            "url": "http://localhost:5000/images/chill/me_when_i_get_a_low_sat_score_but_i_remember/I'm_a_chill_guy_who_low-key_doesn't_gaf.png"
+        },
+        "source": "https://knowyourmeme.com/memes/just-a-chill-guy-my-new-character",
+        "keywords": [],
+        "_self": "http://localhost:5000/templates/chill"
     }
 ]

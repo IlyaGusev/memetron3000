@@ -16,7 +16,7 @@ ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
 DEFAULT_SELECT_PROMPT_PATH = str((PROMPTS_DIR_PATH / "select.jinja").resolve())
-DEFAULT_INITIAL_TEMPLATES_COUNT = 30
+DEFAULT_INITIAL_TEMPLATES_COUNT = 40
 DEFAULT_SELECTED_TEMPLATES_COUNT = 4
 DEFAULT_GENERATED_MEME_COUNT = 2
 
@@ -93,8 +93,10 @@ async def generate_meme(
     response = json.loads(content)
     image_url: Optional[str] = response.get("best_image_url")
     assert image_url
+    image_url = clean_host(image_url).strip()
+    if not image_url.endswith(".png") and not image_url.endswith(".jpg"):
+        image_url += ".png"
     image_url += "?font=impact&watermark="
-    image_url = clean_host(image_url)
     final_url: str = MEMEGEN_HOST + image_url
     return final_url
 
