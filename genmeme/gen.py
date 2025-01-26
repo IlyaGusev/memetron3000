@@ -43,16 +43,19 @@ async def select_templates(
         template = Template(f.read())
 
     meme_templates = random.sample(all_templates, initial_templates_count)
-    prompt = template.render(
-        query=query,
-        meme_templates=meme_templates,
-        selected_templates_count=selected_templates_count,
-    ).strip() + "\n"
+    prompt = (
+        template.render(
+            query=query,
+            meme_templates=meme_templates,
+            selected_templates_count=selected_templates_count,
+        ).strip()
+        + "\n"
+    )
 
     messages = [{"role": "user", "content": prompt}]
     content = await anthropic_completion(messages=messages, model_name=model_name)
 
-    content = content[content.find("{"):content.rfind("}") + 1]
+    content = content[content.find("{") : content.rfind("}") + 1]
     response = json.loads(content)
     memes = response["memes"]
     return [meme_templates[i - 1] for i in memes]
@@ -78,18 +81,21 @@ async def generate_meme(
     )
     with open(generate_prompt_path) as f:
         template = Template(f.read())
-    prompt = template.render(
-        query=query,
-        meme_templates=meme_templates,
-        generated_meme_count=generated_meme_count,
-    ).strip() + "\n"
+    prompt = (
+        template.render(
+            query=query,
+            meme_templates=meme_templates,
+            generated_meme_count=generated_meme_count,
+        ).strip()
+        + "\n"
+    )
     print(prompt)
 
     messages = [{"role": "user", "content": prompt}]
     content = await anthropic_completion(messages=messages, model_name=model_name)
     print(content)
 
-    content = content[content.find("{"):content.rfind("}") + 1]
+    content = content[content.find("{") : content.rfind("}") + 1]
     response = json.loads(content)
     image_url: Optional[str] = response.get("best_image_url")
     assert image_url
@@ -115,7 +121,9 @@ async def gen_image_url(
     for template in all_templates:
         url = template["example"]["url"]
         template["example"]["url"] = clean_host(url)
-        assert not template["example"]["url"].startswith("http"), template["example"]["url"]
+        assert not template["example"]["url"].startswith("http"), template["example"][
+            "url"
+        ]
     image_url = await generate_meme(
         query=query,
         all_templates=all_templates,
@@ -139,15 +147,17 @@ def gen_image_url_sync(
     selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
 ) -> str:
-    return asyncio.run(gen_image_url(
-        query=query,
-        model_name=model_name,
-        generate_prompt_path=generate_prompt_path,
-        select_prompt_path=select_prompt_path,
-        initial_templates_count=initial_templates_count,
-        selected_templates_count=selected_templates_count,
-        generated_meme_count=generated_meme_count,
-    ))
+    return asyncio.run(
+        gen_image_url(
+            query=query,
+            model_name=model_name,
+            generate_prompt_path=generate_prompt_path,
+            select_prompt_path=select_prompt_path,
+            initial_templates_count=initial_templates_count,
+            selected_templates_count=selected_templates_count,
+            generated_meme_count=generated_meme_count,
+        )
+    )
 
 
 if __name__ == "__main__":

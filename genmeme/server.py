@@ -10,11 +10,9 @@ import aiohttp
 from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import create_engine, Column, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 from genmeme.gen import gen_image_url
+from genmeme.db import ImageRecord, SessionLocal
 
 
 class PredictRequest(BaseModel):
@@ -29,25 +27,13 @@ class PredictResponse(BaseModel):
 
 APP = FastAPI()
 STORAGE_PATH = "output"
-SQL_DATABASE_URL = "sqlite:///./images.db"
-SQL_ENGINE = create_engine(SQL_DATABASE_URL)
-SessionLocal = sessionmaker(bind=SQL_ENGINE)
-Base = declarative_base()
-
-
-class ImageRecord(Base):  # type: ignore
-    __tablename__ = "images"
-    result_id = Column(String, primary_key=True)
-    image_url = Column(String)
-    public_url = Column(String)
-
-
-Base.metadata.create_all(SQL_ENGINE)
 
 
 def get_base_url(request: Request) -> str:
     forwarded_proto = request.headers.get("X-Forwarded-Proto", "http")
-    forwarded_host = request.headers.get("X-Forwarded-Host", request.headers.get("Host", "localhost"))
+    forwarded_host = request.headers.get(
+        "X-Forwarded-Host", request.headers.get("Host", "localhost")
+    )
     return f"{forwarded_proto}://{forwarded_host}"
 
 
@@ -59,7 +45,7 @@ async def download_file(url: str, file_path: str) -> bool:
                 if response.status != 200:
                     return False
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                async with aiofiles.open(file_path, 'wb') as f:
+                async with aiofiles.open(file_path, "wb") as f:
                     current_size = 0
                     async for chunk in response.content.iter_chunked(8192):
                         current_size += len(chunk)
@@ -86,9 +72,7 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
 
     db = SessionLocal()
     db_record = ImageRecord(
-        result_id=request.result_id,
-        image_url=image_url,
-        public_url=public_url
+        result_id=request.result_id, image_url=image_url, public_url=public_url
     )
     db.add(db_record)
     db.commit()
@@ -97,10 +81,7 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     total_time = time.time() - start_time
     print(f"Total processing time: {total_time:.3f}s")
 
-    return PredictResponse(
-        type="image",
-        url=public_url
-    )
+    return PredictResponse(type="image", url=public_url)
 
 
 @APP.get("/health")
