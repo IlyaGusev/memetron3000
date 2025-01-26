@@ -10,6 +10,9 @@ import aiohttp
 from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import create_engine, Column, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 from genmeme.gen import gen_image_url
 
@@ -26,6 +29,20 @@ class PredictResponse(BaseModel):
 
 APP = FastAPI()
 STORAGE_PATH = "output"
+SQL_DATABASE_URL = "sqlite:///./images.db"
+SQL_ENGINE = create_engine(SQL_DATABASE_URL)
+SessionLocal = sessionmaker(bind=SQL_ENGINE)
+Base = declarative_base()
+
+
+class ImageRecord(Base):  # type: ignore
+    __tablename__ = "images"
+    result_id = Column(String, primary_key=True)
+    image_url = Column(String)
+    public_url = Column(String)
+
+
+Base.metadata.create_all(SQL_ENGINE)
 
 
 def get_base_url(request: Request) -> str:
@@ -66,6 +83,16 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     assert success
     base_url = get_base_url(req)
     public_url = f"{base_url}/output/{file_name}"
+
+    db = SessionLocal()
+    db_record = ImageRecord(
+        result_id=request.result_id,
+        image_url=image_url,
+        public_url=public_url
+    )
+    db.add(db_record)
+    db.commit()
+    db.close()
 
     total_time = time.time() - start_time
     print(f"Total processing time: {total_time:.3f}s")

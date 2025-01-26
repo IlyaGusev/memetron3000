@@ -704,27 +704,6 @@
         "_self": "http://localhost:5000/templates/harold"
     },
     {
-        "id": "home",
-        "name": "We Have Food at Home",
-        "lines": 3,
-        "overlays": 1,
-        "styles": [
-            "default"
-        ],
-        "blank": "http://localhost:5000/images/home.png",
-        "example": {
-            "text": [
-                "Me: Can we stop and get food?",
-                "Mom: We have food at home.",
-                "Food at home:"
-            ],
-            "url": "http://localhost:5000/images/home/Me:_Can_we_stop_and_get_food~q/Mom:_We_have_food_at_home./Food_at_home:.png"
-        },
-        "source": "https://knowyourmeme.com/memes/we-have-food-at-home",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/home"
-    },
-    {
         "id": "jetpack",
         "name": "Nothing To Do Here",
         "lines": 2,
@@ -917,30 +896,6 @@
         "source": "http://knowyourmeme.com/memes/matrix-morpheus",
         "keywords": [],
         "_self": "http://localhost:5000/templates/morpheus"
-    },
-    {
-        "id": "noah",
-        "name": "What the Hell is This?",
-        "lines": 4,
-        "overlays": 1,
-        "styles": [
-            "default"
-        ],
-        "blank": "http://localhost:5000/images/noah.png",
-        "example": {
-            "text": [
-                "Street",
-                "Road",
-                "Stroad",
-                "What the hell is this?"
-            ],
-            "url": "http://localhost:5000/images/noah/Street/Road/Stroad/What_the_hell_is_this~q.png"
-        },
-        "source": null,
-        "keywords": [
-            "Family Guy Noah"
-        ],
-        "_self": "http://localhost:5000/templates/noah"
     },
     {
         "id": "ntot",
@@ -1451,5 +1406,58 @@
         "source": "https://knowyourmeme.com/memes/just-a-chill-guy-my-new-character",
         "keywords": [],
         "_self": "http://localhost:5000/templates/chill"
+    },
+    {
+        "id": "dramatic-dmitry",
+        "name": "Dramatic Dmitry",
+        "lines": 2,
+        "overlays": 0,
+        "styles": [],
+        "blank": "http://localhost:5000/images/dramatic-dmitry.jpg",
+        "example": {
+            "text": [
+                "The most painful thing when I go to school...",
+                "Forgetting to bring my headphones"
+            ],
+            "url": "http://localhost:5000/images/dramatic-dmitry/the_most_painful_thing_when_i_go_to_school.../forgetting_to_bring_my_headphones.png"
+        },
+        "source": "https://knowyourmeme.com/memes/dramatic-dmitry",
+        "keywords": [],
+        "_self": "http://localhost:5000/templates/dramatic-dmitry"
+    },
+    {
+        "id": "silence",
+        "name": "Silence X, a Y Is Talking.",
+        "lines": 2,
+        "overlays": 0,
+        "styles": [],
+        "blank": "http://localhost:5000/images/silence.jpg",
+        "example": {
+            "text": [
+                "Молчать, человеки",
+                "бот рассказывает анекдот"
+            ],
+            "url": "http://localhost:5000/images/silence/молчать,_человеки/бот_рассказывает_анекдот.jpg"
+        },
+        "source": "https://knowyourmeme.com/memes/silence-x-a-y-is-talking",
+        "keywords": [],
+        "_self": "http://localhost:5000/templates/silence"
+    },
+    {
+        "id": "smugjak",
+        "name": "Smugjak, 1 line",
+        "lines": 1,
+        "overlays": 0,
+        "styles": [],
+        "blank": "http://localhost:5000/images/smugjak.jpg",
+        "example": {
+            "text": [
+                "жаль, что далеко не все поймут в чём же дело))) действительно тонко))))) не так уж много и образованных в наше время))))"
+            ],
+            "url": "http://localhost:5000/images/smugjak/жаль,_что_далеко_не_все_поймут_в_чём_же_дело)))_действительно_тонко)))))_не_так_уж_много_и_образованных_в_наше_время)))).jpg"
+        },
+        "source": "https://knowyourmeme.com/memes/smugjak-but-how-does-this-affect-you-personally",
+        "keywords": [],
+        "_self": "http://localhost:5000/templates/smugjak"
     }
 ]
