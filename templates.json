@@ -394,24 +394,6 @@
         "_self": "http://localhost:5000/templates/dg"
     },
     {
-        "id": "disastergirl",
-        "name": "Disaster Girl",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/disastergirl.png",
-        "example": {
-            "text": [
-                "",
-                "just as I planned..."
-            ],
-            "url": "http://localhost:5000/images/disastergirl/_/just_as_I_planned....png"
-        },
-        "source": "http://knowyourmeme.com/memes/disaster-girl",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/disastergirl"
-    },
-    {
         "id": "doge",
         "name": "Doge",
         "lines": 2,
@@ -436,23 +418,6 @@
         "source": "http://knowyourmeme.com/memes/doge",
         "keywords": [],
         "_self": "http://localhost:5000/templates/doge"
-    },
-    {
-        "id": "dragon",
-        "name": "What Color Do You Want Your Dragon",
-        "lines": 1,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/dragon.png",
-        "example": {
-            "text": [
-                "OK I want a boyfriend"
-            ],
-            "url": "http://localhost:5000/images/dragon/OK_I_want_a_boyfriend.png"
-        },
-        "source": "https://knowyourmeme.com/photos/1052192-tumblr",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/dragon"
     },
     {
         "id": "drake",
@@ -582,49 +547,6 @@
         "_self": "http://localhost:5000/templates/fine"
     },
     {
-        "id": "fry",
-        "name": "Futurama Fry",
-        "lines": 2,
-        "overlays": 1,
-        "styles": [
-            "animated",
-            "default"
-        ],
-        "blank": "http://localhost:5000/images/fry.png",
-        "example": {
-            "text": [
-                "not sure if trolling",
-                "or just stupid"
-            ],
-            "url": "http://localhost:5000/images/fry/not_sure_if_trolling/or_just_stupid.png"
-        },
-        "source": "http://knowyourmeme.com/memes/futurama-fry-not-sure-if",
-        "keywords": [
-            "Philip J. Fry"
-        ],
-        "_self": "http://localhost:5000/templates/fry"
-    },
-    {
-        "id": "gandalf",
-        "name": "Confused Gandalf",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/gandalf.png",
-        "example": {
-            "text": [
-                "",
-                "I have no memory of this place"
-            ],
-            "url": "http://localhost:5000/images/gandalf/_/I_have_no_memory_of_this_place.png"
-        },
-        "source": "http://knowyourmeme.com/memes/confused-gandalf",
-        "keywords": [
-            "Lord of the Rings"
-        ],
-        "_self": "http://localhost:5000/templates/gandalf"
-    },
-    {
         "id": "gb",
         "name": "Galaxy Brain",
         "lines": 4,
@@ -686,41 +608,6 @@
         "_self": "http://localhost:5000/templates/gru"
     },
     {
-        "id": "harold",
-        "name": "Hide the Pain Harold",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/harold.png",
-        "example": {
-            "text": [
-                "when the boss sees",
-                "your meme tab"
-            ],
-            "url": "http://localhost:5000/images/harold/when_the_boss_sees/your_meme_tab.png"
-        },
-        "source": "https://knowyourmeme.com/memes/hide-the-pain-harold",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/harold"
-    },
-    {
-        "id": "jetpack",
-        "name": "Nothing To Do Here",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/jetpack.png",
-        "example": {
-            "text": [
-                "nothing to do here"
-            ],
-            "url": "http://localhost:5000/images/jetpack/nothing_to_do_here.png"
-        },
-        "source": "http://knowyourmeme.com/memes/nothing-to-do-here-jet-pack-guy",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/jetpack"
-    },
-    {
         "id": "justarobot",
         "name": "You just a robot",
         "lines": 2,
@@ -760,24 +647,6 @@
         "source": "http://knowyourmeme.com/memes/conspiracy-keanu",
         "keywords": [],
         "_self": "http://localhost:5000/templates/keanu"
-    },
-    {
-        "id": "leo",
-        "name": "Leo Strutting",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/leo.png",
-        "example": {
-            "text": [
-                "I have no idea",
-                "what I am doing"
-            ],
-            "url": "http://localhost:5000/images/leo/I_have_no_idea/what_I_am_doing.png"
-        },
-        "source": "https://knowyourmeme.com/memes/strutting-leo",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/leo"
     },
     {
         "id": "michael-scott",
@@ -878,24 +747,6 @@
         "source": "http://knowyourmeme.com/memes/one-does-not-simply-walk-into-mordor",
         "keywords": [],
         "_self": "http://localhost:5000/templates/mordor"
-    },
-    {
-        "id": "morpheus",
-        "name": "Matrix Morpheus",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/morpheus.png",
-        "example": {
-            "text": [
-                "what if I told you that",
-                "reality was an illusion?"
-            ],
-            "url": "http://localhost:5000/images/morpheus/what_if_I_told_you_that/reality_was_an_illusion~q.png"
-        },
-        "source": "http://knowyourmeme.com/memes/matrix-morpheus",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/morpheus"
     },
     {
         "id": "ntot",
@@ -1175,24 +1026,6 @@
         "_self": "http://localhost:5000/templates/snek"
     },
     {
-        "id": "sparta",
-        "name": "This is Sparta!",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/sparta.png",
-        "example": {
-            "text": [
-                "this. is.",
-                "sparta!"
-            ],
-            "url": "http://localhost:5000/images/sparta/this._is./sparta!.png"
-        },
-        "source": "https://www.youtube.com/watch?v=QkWS9PiXekE",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/sparta"
-    },
-    {
         "id": "spiderman",
         "name": "Spider-Man Pointing at Spider-Man",
         "lines": 2,
@@ -1372,24 +1205,6 @@
         "_self": "http://localhost:5000/templates/woman-cat"
     },
     {
-        "id": "wonka",
-        "name": "Condescending Wonka",
-        "lines": 2,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/wonka.png",
-        "example": {
-            "text": [
-                "oh, you just graduated?",
-                "you must know everything"
-            ],
-            "url": "http://localhost:5000/images/wonka/oh,_you_just_graduated~q/you_must_know_everything.png"
-        },
-        "source": "http://knowyourmeme.com/memes/condescending-wonka-creepy-wonka",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/wonka"
-    },
-    {
         "id": "chill",
         "name": "Chill Guy",
         "lines": 2,
@@ -1442,22 +1257,5 @@
         "source": "https://knowyourmeme.com/memes/silence-x-a-y-is-talking",
         "keywords": [],
         "_self": "http://localhost:5000/templates/silence"
-    },
-    {
-        "id": "smugjak",
-        "name": "Smugjak, 1 line",
-        "lines": 1,
-        "overlays": 0,
-        "styles": [],
-        "blank": "http://localhost:5000/images/smugjak.jpg",
-        "example": {
-            "text": [
-                "жаль, что далеко не все поймут в чём же дело))) действительно тонко))))) не так уж много и образованных в наше время))))"
-            ],
-            "url": "http://localhost:5000/images/smugjak/жаль,_что_далеко_не_все_поймут_в_чём_же_дело)))_действительно_тонко)))))_не_так_уж_много_и_образованных_в_наше_время)))).jpg"
-        },
-        "source": "https://knowyourmeme.com/memes/smugjak-but-how-does-this-affect-you-personally",
-        "keywords": [],
-        "_self": "http://localhost:5000/templates/smugjak"
     }
 ]

@@ -1,3 +1,4 @@
+import json
 from collections import Counter
 
 import requests
@@ -36,17 +37,22 @@ for r in all_records:
         template_lose_counts[template] += 1
         global_lose_count += 1
 
+with open("templates.json") as r:
+    templates = [t["id"] for t in json.load(r)]
 
 print(f"GLOBAL WINS: {global_wins_count}")
 print(f"GLOBAL LOSES: {global_lose_count}")
 print(f"GLOBAL TIES: {global_ties_count}")
 used_templates = list(
-    set(template_win_counts.keys()) | set(template_lose_counts.keys())
+    (set(template_win_counts.keys()) | set(template_lose_counts.keys())) & set(templates)
 )
 template_win_rates = dict()
 for template in used_templates:
-    template_win_rates[template] = template_win_counts[template] / (
+    template_win_rates[template] = (template_win_counts[template] / (
         template_win_counts[template] + template_lose_counts[template]
-    )
+    ), template_win_counts[template] + template_lose_counts[template])
 
-print(sorted(template_win_rates.items(), key=lambda x: x[1]))
+for name, (winrate, count) in sorted(template_win_rates.items(), key=lambda x: x[1]):
+    if count < 5:
+        continue
+    print(name, count, winrate)
