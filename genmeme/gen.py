@@ -16,9 +16,10 @@ ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
 DEFAULT_SELECT_PROMPT_PATH = str((PROMPTS_DIR_PATH / "select.jinja").resolve())
-DEFAULT_INITIAL_TEMPLATES_COUNT = 40
-DEFAULT_SELECTED_TEMPLATES_COUNT = 4
-DEFAULT_GENERATED_MEME_COUNT = 2
+DEFAULT_INITIAL_TEMPLATES_COUNT = 30
+DEFAULT_SELECTED_TEMPLATES_COUNT = 8
+DEFAULT_GENERATED_MEME_COUNT = 3
+RANDOM_SELECT = True
 
 
 def clean_host(url: str) -> str:
@@ -70,15 +71,20 @@ async def generate_meme(
     initial_templates_count: int,
     selected_templates_count: int,
     generated_meme_count: int,
+    random_select: bool = True
 ) -> str:
-    meme_templates = await select_templates(
-        query=query,
-        all_templates=all_templates,
-        prompt_path=select_prompt_path,
-        model_name=model_name,
-        initial_templates_count=initial_templates_count,
-        selected_templates_count=selected_templates_count,
-    )
+    if not random_select:
+        meme_templates = await select_templates(
+            query=query,
+            all_templates=all_templates,
+            prompt_path=select_prompt_path,
+            model_name=model_name,
+            initial_templates_count=initial_templates_count,
+            selected_templates_count=selected_templates_count,
+        )
+    else:
+        meme_templates = random.sample(all_templates, selected_templates_count)
+
     with open(generate_prompt_path) as f:
         template = Template(f.read())
     prompt = (
@@ -115,6 +121,7 @@ async def gen_image_url(
     initial_templates_count: int = DEFAULT_INITIAL_TEMPLATES_COUNT,
     selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
+    random_select: bool = RANDOM_SELECT,
 ) -> str:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
@@ -133,6 +140,7 @@ async def gen_image_url(
         initial_templates_count=initial_templates_count,
         selected_templates_count=selected_templates_count,
         generated_meme_count=generated_meme_count,
+        random_select=random_select,
     )
     print(image_url)
     return image_url

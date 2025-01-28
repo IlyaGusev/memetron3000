@@ -53,6 +53,6 @@ for template in used_templates:
     ), template_win_counts[template] + template_lose_counts[template])
 
 for name, (winrate, count) in sorted(template_win_rates.items(), key=lambda x: x[1]):
-    if count < 5:
+    if count < 3:
         continue
     print(name, count, winrate)

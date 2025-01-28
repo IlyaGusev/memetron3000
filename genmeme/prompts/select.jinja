@@ -7,13 +7,15 @@
 {% for template in meme_templates %}
 ###
 ID: {{loop.index}}
-Name: {{template.name}}
-Example texts: {{template.example.text}}
-Example url: {{template.example.url}}
+Название: {{template.name}}{% if template.description %}
+Описание: {{template.description}}{% endif %}
+Пример подписей: {{template.example.text}}
+Пример URL: {{template.example.url}}
 {% endfor %}
 ###
 
 Верни ID {{selected_templates_count}} шаблонов, которые больше всего подходят запросу и имеют наибольший потенциал для создания смешного мема по этому запросу.
+Постарайся выбрать шаблоны, наиболее подходящие именно под этот запрос.
 Сначала возвращай ID наиболее подходящих и приоритетных шаблонов.
 Верни JSON следующей структуры:
 {
