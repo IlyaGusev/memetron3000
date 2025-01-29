@@ -46,16 +46,23 @@ print(f"GLOBAL WINS: {global_wins_count}")
 print(f"GLOBAL LOSES: {global_lose_count}")
 print(f"GLOBAL TIES: {global_ties_count}")
 used_templates = list(
-    (set(template_win_counts.keys()) | set(template_lose_counts.keys())) & set(templates)
+    (set(template_win_counts.keys()) | set(template_lose_counts.keys()))
+    & set(templates)
 )
 template_win_rates = dict()
 for template in used_templates:
     wins = template_win_counts[template]
     loses = template_lose_counts[template]
     ties = template_tie_counts[template]
-    template_win_rates[template] = (wins / (wins + loses), wins + loses, wins + loses + ties)
+    template_win_rates[template] = (
+        wins / (wins + loses),
+        wins + loses,
+        wins + loses + ties,
+    )
 
-for name, (winrate, count, count_w_ties) in sorted(template_win_rates.items(), key=lambda x: x[1]):
+for name, (winrate, count, count_w_ties) in sorted(
+    template_win_rates.items(), key=lambda x: x[1]
+):
     if count < 3:
         continue
     print(name, count, count_w_ties, winrate)

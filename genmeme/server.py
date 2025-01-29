@@ -1,18 +1,17 @@
-import os
-import uuid
 import time
 from typing import Optional, Literal, Dict, Any
 from datetime import datetime
 
 import uvicorn
-import aiofiles
-import aiohttp
 from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 
-from genmeme.gen import gen_image_url
+from genmeme.gen import generate_meme, STORAGE_PATH
 from genmeme.db import ImageRecord, SessionLocal
+
+
+APP = FastAPI()
 
 
 class PredictRequest(BaseModel):
@@ -25,10 +24,6 @@ class PredictResponse(BaseModel):
     url: Optional[str] = None
 
 
-APP = FastAPI()
-STORAGE_PATH = "output"
-
-
 def get_base_url(request: Request) -> str:
     forwarded_proto = request.headers.get("X-Forwarded-Proto", "http")
     forwarded_host = request.headers.get(
@@ -37,42 +32,17 @@ def get_base_url(request: Request) -> str:
     return f"{forwarded_proto}://{forwarded_host}"
 
 
-async def download_file(url: str, file_path: str) -> bool:
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                print("Download status:", response.status)
-                if response.status != 200:
-                    return False
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                async with aiofiles.open(file_path, "wb") as f:
-                    current_size = 0
-                    async for chunk in response.content.iter_chunked(8192):
-                        current_size += len(chunk)
-                        await f.write(chunk)
-                return True
-    except Exception:
-        if os.path.exists(file_path):
-            os.remove(file_path)
-        return False
-
-
 @APP.post("/api/v1/predict", response_model=PredictResponse)
 async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     start_time = time.time()
 
-    image_url = await gen_image_url(request.prompt)
-
-    file_name = f"{uuid.uuid4()}.jpg"
-    file_path = os.path.join(STORAGE_PATH, file_name)
-    success = await download_file(image_url, file_path)
-    assert success
+    file_name, meta_str = await generate_meme(request.prompt)
     base_url = get_base_url(req)
     public_url = f"{base_url}/output/{file_name}"
 
     db = SessionLocal()
     db_record = ImageRecord(
-        result_id=request.result_id, image_url=image_url, public_url=public_url
+        result_id=request.result_id, image_url=meta_str, public_url=public_url
     )
     db.add(db_record)
     db.commit()
