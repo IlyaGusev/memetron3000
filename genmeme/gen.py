@@ -3,7 +3,6 @@ import fire  # type: ignore
 import random
 import json
 import time
-from typing import List, Dict, Any, Optional
 
 from jinja2 import Template
 
@@ -15,7 +14,6 @@ MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
-DEFAULT_SELECT_PROMPT_PATH = str((PROMPTS_DIR_PATH / "select.jinja").resolve())
 DEFAULT_SELECTED_TEMPLATES_COUNT = 10
 DEFAULT_GENERATED_MEME_COUNT = 3
 
@@ -33,7 +31,6 @@ def clean_host(url: str) -> str:
 async def gen_image_url(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
-    select_prompt_path: str = DEFAULT_SELECT_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
@@ -45,6 +42,10 @@ async def gen_image_url(
         url = template["example"]["url"]
         url = clean_host(url)
         template["example"]["url"] = url
+        template["example"]["text"] = json.dumps(
+            template["example"]["text"],
+            ensure_ascii=False
+        )
         assert not url.startswith("http"), url
 
     with open(generate_prompt_path) as f:
@@ -66,20 +67,19 @@ async def gen_image_url(
 
     content = content[content.find("{") : content.rfind("}") + 1]
     response = json.loads(content)
-    image_url: Optional[str] = response.get("best_image_url")
-    assert image_url
-    image_url = clean_host(image_url).strip()
-    if not image_url.endswith(".png") and not image_url.endswith(".jpg"):
-        image_url += ".png"
-    image_url += "?font=impact&watermark="
-    final_url: str = MEMEGEN_HOST + image_url
-    return final_url
+    best_meme = response.get("best_meme")
+    meme_id = best_meme["id"]
+    meme_captions = best_meme["captions"]
+    prefix = f"{MEMEGEN_HOST}/images/{meme_id}/"
+    suffix = ".jpg?font=impact&watermark="
+    meme_captions = [c.replace(" ", "_").replace("?", "~q") for c in meme_captions]
+    final_captions = "/".join(meme_captions)
+    return prefix + final_captions + suffix
 
 
 def gen_image_url_sync(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
-    select_prompt_path: str = DEFAULT_SELECT_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
@@ -89,7 +89,6 @@ def gen_image_url_sync(
             query=query,
             model_name=model_name,
             generate_prompt_path=generate_prompt_path,
-            select_prompt_path=select_prompt_path,
             selected_templates_count=selected_templates_count,
             generated_meme_count=generated_meme_count,
         )
