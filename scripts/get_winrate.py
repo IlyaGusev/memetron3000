@@ -16,6 +16,7 @@ global_ties_count = 0
 global_lose_count = 0
 template_win_counts = Counter()
 template_lose_counts = Counter()
+template_tie_counts = Counter()
 
 for r in all_records:
     result_id = int(r.result_id)
@@ -33,6 +34,7 @@ for r in all_records:
         template_win_counts[template] += 1
     elif vote in ("SAME_SHIT", "SAME"):
         global_ties_count += 1
+        template_tie_counts[template] += 1
     else:
         template_lose_counts[template] += 1
         global_lose_count += 1
@@ -48,11 +50,12 @@ used_templates = list(
 )
 template_win_rates = dict()
 for template in used_templates:
-    template_win_rates[template] = (template_win_counts[template] / (
-        template_win_counts[template] + template_lose_counts[template]
-    ), template_win_counts[template] + template_lose_counts[template])
+    wins = template_win_counts[template]
+    loses = template_lose_counts[template]
+    ties = template_tie_counts[template]
+    template_win_rates[template] = (wins / (wins + loses), wins + loses, wins + loses + ties)
 
-for name, (winrate, count) in sorted(template_win_rates.items(), key=lambda x: x[1]):
+for name, (winrate, count, count_w_ties) in sorted(template_win_rates.items(), key=lambda x: x[1]):
     if count < 3:
         continue
-    print(name, count, winrate)
+    print(name, count, count_w_ties, winrate)
