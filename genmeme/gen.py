@@ -17,6 +17,7 @@ from genmeme.video import create_meme_video
 
 
 STORAGE_PATH = "output"
+VIDEOS_PATH = "videos"
 MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
@@ -65,15 +66,12 @@ async def generate_meme(
 ) -> Tuple[str, str]:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
-    meme_templates = random.sample(all_templates, selected_templates_count)
+    meme_templates = random.sample(all_templates, min(selected_templates_count, len(all_templates)))
     for template in meme_templates:
-        url = template["example"]["url"]
-        url = clean_host(url)
-        template["example"]["url"] = url
-        template["example"]["text"] = json.dumps(
-            template["example"]["text"], ensure_ascii=False
-        )
-        assert not url.startswith("http"), url
+        if not isinstance(template["example"]["text"], str):
+            template["example"]["text"] = json.dumps(
+                template["example"]["text"], ensure_ascii=False
+            )
 
     with open(generate_prompt_path) as f:
         template = Template(f.read())
@@ -97,11 +95,21 @@ async def generate_meme(
     best_meme = response.get("best_meme")
     meme_id = best_meme["id"]
     meme_captions = best_meme["captions"]
+    encoded_meme_captions = [c.replace(" ", "_").replace("?", "~q") for c in meme_captions]
+    final_captions_str = "/".join(encoded_meme_captions)
+
+    meme_templates = {m["id"]: m for m in meme_templates}
+    selected_template = meme_templates.get(meme_id)
+    if selected_template and selected_template.get("type") == "video":
+        input_path = os.path.join(VIDEOS_PATH, meme_id + ".mp4")
+        file_name = f"{uuid.uuid4()}.mp4"
+        output_path = os.path.join(STORAGE_PATH, file_name)
+        create_meme_video(input_path, output_path, meme_captions[0])
+        return file_name, f"http://localhost/videos/{meme_id}/{final_captions_str}"
+
     prefix = f"{MEMEGEN_HOST}/images/{meme_id}/"
     suffix = ".jpg?font=impact&watermark="
-    meme_captions = [c.replace(" ", "_").replace("?", "~q") for c in meme_captions]
-    final_captions = "/".join(meme_captions)
-    image_url = prefix + final_captions + suffix
+    image_url = prefix + final_captions_str + suffix
 
     file_name = f"{uuid.uuid4()}.jpg"
     file_path = os.path.join(STORAGE_PATH, file_name)

@@ -51,6 +51,8 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     total_time = time.time() - start_time
     print(f"Total processing time: {total_time:.3f}s")
 
+    if public_url.endswith(".mp4"):
+        return PredictResponse(type="video", url=public_url)
     return PredictResponse(type="image", url=public_url)
 
 
