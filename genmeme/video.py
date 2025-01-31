@@ -57,8 +57,8 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
         threads=32,
         preset="ultrafast",
         ffmpeg_params=[
-            #"-movflags",
-            #"faststart",
+            "-movflags",
+            "faststart",
             "-metadata",
             "handler_name=VideoHandler"
         ],
