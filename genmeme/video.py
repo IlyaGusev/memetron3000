@@ -8,7 +8,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
 
     desired_box_height = (video_height // 7 * 2)
     padding = desired_box_height // 5
-    initial_font_size = 80
+    initial_font_size = 50
 
     font_size = initial_font_size
     while True:
@@ -69,7 +69,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
 
 if __name__ == "__main__":
     create_meme_video(
-        "videos/cat_enough.mp4",
-        "output/cat_enough_output.mp4",
-        "Когда сделал много дел на работе а дома ждёт ещё больше дел",
+        "videos/scary_cat.mp4",
+        "output/scary_cat_output.mp4",
+        "Годовой план работы, который нужно сдать в понедельник, пока я смотрю 5й видос с котиками в воскресенье вечером:"
     )
