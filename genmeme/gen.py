@@ -22,18 +22,8 @@ MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
-DEFAULT_SELECTED_TEMPLATES_COUNT = 10
+DEFAULT_SELECTED_TEMPLATES_COUNT = 8
 DEFAULT_GENERATED_MEME_COUNT = 3
-
-
-def clean_host(url: str) -> str:
-    url = url.replace(MEMEGEN_HOST, "")
-    url = url.replace("http://localhost:5000", "")
-    url = url.replace("https://memegen.link", "")
-    url = url.replace("http://memegen.link", "")
-    url = url.replace("https://api.memegen.link", "")
-    url = url.replace("http://api.memegen.link", "")
-    return url
 
 
 async def download_file(url: str, file_path: str) -> bool:
@@ -95,7 +85,7 @@ async def generate_meme(
     best_meme = response.get("best_meme")
     meme_id = best_meme["id"]
     meme_captions = best_meme["captions"]
-    encoded_meme_captions = [c.replace(" ", "_").replace("?", "~q") for c in meme_captions]
+    encoded_meme_captions = [c.replace(" ", "_").replace("?", "~q").replace("/", "|") for c in meme_captions]
     final_captions_str = "/".join(encoded_meme_captions)
 
     meme_templates = {m["id"]: m for m in meme_templates}
