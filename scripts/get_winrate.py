@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 from collections import Counter
 
 import requests
@@ -16,10 +17,10 @@ global_wins_count = 0
 global_ties_count = 0
 global_bad_ties_count = 0
 global_lose_count = 0
-template_win_counts = Counter()
-template_lose_counts = Counter()
-template_tie_counts = Counter()
-template_bad_tie_counts = Counter()
+template_win_counts: Dict[str, int] = Counter()
+template_lose_counts: Dict[str, int] = Counter()
+template_tie_counts: Dict[str, int] = Counter()
+template_bad_tie_counts: Dict[str, int] = Counter()
 
 for r in tqdm(all_records[-2000:]):
     result_id = int(r.result_id)
@@ -45,8 +46,8 @@ for r in tqdm(all_records[-2000:]):
         global_lose_count += 1
         template_lose_counts[template] += 1
 
-with open("templates.json") as r:
-    templates = [t["id"] for t in json.load(r)]
+with open("templates.json") as f:
+    templates = [t["id"] for t in json.load(f)]
 
 print(f"GLOBAL WINS: {global_wins_count}")
 print(f"GLOBAL LOSES: {global_lose_count}")

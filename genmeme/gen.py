@@ -56,7 +56,9 @@ async def generate_meme(
 ) -> Tuple[str, str]:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
-    meme_templates = random.sample(all_templates, min(selected_templates_count, len(all_templates)))
+    meme_templates = random.sample(
+        all_templates, min(selected_templates_count, len(all_templates))
+    )
     for template in meme_templates:
         if not isinstance(template["example"]["text"], str):
             template["example"]["text"] = json.dumps(
@@ -85,11 +87,13 @@ async def generate_meme(
     best_meme = response.get("best_meme")
     meme_id = best_meme["id"]
     meme_captions = best_meme["captions"]
-    encoded_meme_captions = [c.replace(" ", "_").replace("?", "~q").replace("/", "|") for c in meme_captions]
+    encoded_meme_captions = [
+        c.replace(" ", "_").replace("?", "~q").replace("/", "|") for c in meme_captions
+    ]
     final_captions_str = "/".join(encoded_meme_captions)
 
-    meme_templates = {m["id"]: m for m in meme_templates}
-    selected_template = meme_templates.get(meme_id)
+    id_to_meme_templates = {m["id"]: m for m in meme_templates}
+    selected_template = id_to_meme_templates.get(meme_id)
     if selected_template and selected_template.get("type") == "video":
         input_path = os.path.join(VIDEOS_PATH, meme_id + ".mp4")
         file_name = f"{uuid.uuid4()}.mp4"

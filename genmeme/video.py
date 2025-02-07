@@ -6,7 +6,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
     video_width: int = video.size[0]
     video_height: int = video.size[1]
 
-    desired_box_height = (video_height // 7 * 2)
+    desired_box_height = video_height // 7 * 2
     padding = desired_box_height // 5
     initial_font_size = 50
 
@@ -60,7 +60,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
             "-movflags",
             "faststart",
             "-metadata",
-            "handler_name=VideoHandler"
+            "handler_name=VideoHandler",
         ],
     )
     video.close()
@@ -71,5 +71,5 @@ if __name__ == "__main__":
     create_meme_video(
         "videos/scary_cat.mp4",
         "output/scary_cat_output.mp4",
-        "Годовой план работы, который нужно сдать в понедельник, пока я смотрю 5й видос с котиками в воскресенье вечером:"
+        "Годовой план работы, который нужно сдать в понедельник, пока я смотрю 5й видос с котиками в воскресенье вечером:",
     )
