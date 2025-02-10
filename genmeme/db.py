@@ -1,4 +1,6 @@
-from sqlalchemy import create_engine, Column, String
+import datetime
+
+from sqlalchemy import create_engine, Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -13,6 +15,9 @@ class ImageRecord(Base):  # type: ignore
     result_id = Column(String, primary_key=True)
     image_url = Column(String)
     public_url = Column(String)
+    query = Column(String, nullable=True)
+    label = Column(String, nullable=True, default="UNDEFINED")
+    created_at = Column(DateTime, nullable=True)
 
 
 Base.metadata.create_all(SQL_ENGINE)

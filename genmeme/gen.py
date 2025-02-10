@@ -22,7 +22,7 @@ MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
-DEFAULT_SELECTED_TEMPLATES_COUNT = 9
+DEFAULT_SELECTED_TEMPLATES_COUNT = 7
 DEFAULT_GENERATED_MEME_COUNT = 3
 
 
@@ -98,7 +98,8 @@ async def generate_meme(
         input_path = os.path.join(VIDEOS_PATH, meme_id + ".mp4")
         file_name = f"{uuid.uuid4()}.mp4"
         output_path = os.path.join(STORAGE_PATH, file_name)
-        create_meme_video(input_path, output_path, meme_captions[0])
+        video_caption = "\n".join(meme_captions)
+        create_meme_video(input_path, output_path, video_caption)
         return file_name, f"http://localhost/videos/{meme_id}/{final_captions_str}"
 
     prefix = f"{MEMEGEN_HOST}/images/{meme_id}/"
