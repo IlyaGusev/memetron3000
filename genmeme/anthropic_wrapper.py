@@ -13,7 +13,7 @@ DEFAULT_SLEEP_TIME = 2
 async def anthropic_completion(
     messages: List[Dict[str, Any]],
     model_name: str = DEFAULT_MODEL,
-    temperature: float = 1.0,
+    temperature: float = 0.8,
     sleep_time: int = DEFAULT_SLEEP_TIME,
     api_key: Optional[str] = None,
     max_tokens: int = 2048,

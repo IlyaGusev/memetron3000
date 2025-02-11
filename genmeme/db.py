@@ -1,23 +1,29 @@
-import datetime
+from typing import Optional
+from datetime import datetime
 
-from sqlalchemy import create_engine, Column, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, String, DateTime
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, Mapped, mapped_column
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+class ImageRecord(Base):
+    __tablename__ = "images"
+    result_id: Mapped[str] = mapped_column(String, primary_key=True)
+    image_url: Mapped[str]
+    public_url: Mapped[str]
+    query: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    label: Mapped[Optional[str]] = mapped_column(
+        String, nullable=True, default="UNDEFINED"
+    )
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
+    captions: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    template_id: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
 
 SQL_DATABASE_URL = "sqlite:///./images.db"
 SQL_ENGINE = create_engine(SQL_DATABASE_URL)
 SessionLocal = sessionmaker(bind=SQL_ENGINE)
-Base = declarative_base()
-
-
-class ImageRecord(Base):  # type: ignore
-    __tablename__ = "images"
-    result_id = Column(String, primary_key=True)
-    image_url = Column(String)
-    public_url = Column(String)
-    query = Column(String, nullable=True)
-    label = Column(String, nullable=True, default="UNDEFINED")
-    created_at = Column(DateTime, nullable=True)
-
-
 Base.metadata.create_all(SQL_ENGINE)

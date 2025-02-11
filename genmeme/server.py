@@ -36,17 +36,19 @@ def get_base_url(request: Request) -> str:
 async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     start_time = time.time()
 
-    file_name, meta_str = await generate_meme(request.prompt)
+    response = await generate_meme(request.prompt)
     base_url = get_base_url(req)
-    public_url = f"{base_url}/output/{file_name}"
+    public_url = f"{base_url}/output/{response.file_name}"
 
     db = SessionLocal()
     db_record = ImageRecord(
         result_id=request.result_id,
-        image_url=meta_str,
+        image_url=response.image_url,
         public_url=public_url,
         query=request.prompt,
         created_at=datetime.utcnow(),
+        captions=response.captions,
+        template_id=response.template_id,
     )
     db.add(db_record)
     db.commit()

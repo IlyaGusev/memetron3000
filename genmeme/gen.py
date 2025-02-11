@@ -4,7 +4,7 @@ import random
 import json
 import time
 import uuid
-from typing import Tuple
+from dataclasses import dataclass
 
 from jinja2 import Template
 import aiofiles
@@ -22,8 +22,17 @@ MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
-DEFAULT_SELECTED_TEMPLATES_COUNT = 7
+DEFAULT_VIDEO_TEMPLATES_COUNT = 5
+DEFAULT_IMAGE_TEMPLATES_COUNT = 2
 DEFAULT_GENERATED_MEME_COUNT = 3
+
+
+@dataclass
+class MemeResponse:
+    file_name: str
+    image_url: str = ""
+    template_id: str = ""
+    captions: str = ""
 
 
 async def download_file(url: str, file_path: str) -> bool:
@@ -51,14 +60,26 @@ async def generate_meme(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
-    selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
+    video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
+    image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
-) -> Tuple[str, str]:
+) -> MemeResponse:
     random.seed(time.time())
     all_templates = ALL_MEME_TEMPLATES
-    meme_templates = random.sample(
-        all_templates, min(selected_templates_count, len(all_templates))
-    )
+
+    video_templates = [t for t in all_templates if t.get("type", "image") == "video"]
+    image_templates = [t for t in all_templates if t.get("type", "image") == "image"]
+    selected_video_templates = []
+    selected_image_templates = []
+    if video_templates:
+        count = min(video_templates_count, len(video_templates))
+        selected_video_templates = random.sample(video_templates, count)
+    if image_templates:
+        count = min(image_templates_count, len(image_templates))
+        selected_image_templates = random.sample(image_templates, count)
+    meme_templates = selected_video_templates + selected_image_templates
+    random.shuffle(meme_templates)
+
     for template in meme_templates:
         if not isinstance(template["example"]["text"], str):
             template["example"]["text"] = json.dumps(
@@ -100,7 +121,14 @@ async def generate_meme(
         output_path = os.path.join(STORAGE_PATH, file_name)
         video_caption = "\n".join(meme_captions)
         create_meme_video(input_path, output_path, video_caption)
-        return file_name, f"http://localhost/videos/{meme_id}/{final_captions_str}"
+        url = f"http://localhost/videos/{meme_id}/{final_captions_str}"
+
+        return MemeResponse(
+            file_name=file_name,
+            image_url=url,
+            template_id=meme_id,
+            captions=json.dumps(meme_captions, ensure_ascii=False),
+        )
 
     prefix = f"{MEMEGEN_HOST}/images/{meme_id}/"
     suffix = ".jpg?font=impact&watermark="
@@ -111,22 +139,29 @@ async def generate_meme(
     success = await download_file(image_url, file_path)
     assert success
 
-    return file_name, image_url
+    return MemeResponse(
+        file_name=file_name,
+        image_url=image_url,
+        template_id=meme_id,
+        captions=json.dumps(meme_captions, ensure_ascii=False),
+    )
 
 
 def generate_meme_sync(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
-    selected_templates_count: int = DEFAULT_SELECTED_TEMPLATES_COUNT,
+    video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
+    image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
-) -> Tuple[str, str]:
+) -> MemeResponse:
     return asyncio.run(
         generate_meme(
             query=query,
             model_name=model_name,
             generate_prompt_path=generate_prompt_path,
-            selected_templates_count=selected_templates_count,
+            video_templates_count=video_templates_count,
+            image_templates_count=image_templates_count,
             generated_meme_count=generated_meme_count,
         )
     )
