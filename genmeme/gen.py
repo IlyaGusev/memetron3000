@@ -23,6 +23,7 @@ DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
 DEFAULT_VIDEO_TEMPLATES_COUNT = 5
 DEFAULT_IMAGE_TEMPLATES_COUNT = 2
 DEFAULT_GENERATED_MEME_COUNT = 3
+MAX_QUERY_LENGTH = 600
 
 
 @dataclass
@@ -87,9 +88,15 @@ async def generate_meme(
     with open(generate_prompt_path) as f:
         template = Template(f.read())
 
+    cut_query = query
+    if len(query) >= MAX_QUERY_LENGTH:
+        space_pos = query.find(" ", MAX_QUERY_LENGTH)
+        if space_pos != -1:
+            cut_query = query[:space_pos] + "..."
+
     prompt = (
         template.render(
-            query=query,
+            query=cut_query,
             meme_templates=meme_templates,
             generated_meme_count=generated_meme_count,
         ).strip()
