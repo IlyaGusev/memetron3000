@@ -11,13 +11,11 @@ import aiofiles
 import aiohttp
 import fire  # type: ignore
 
-from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH
+from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH, STORAGE_PATH, VIDEOS_PATH
 from genmeme.anthropic_wrapper import anthropic_completion
 from genmeme.video import create_meme_video
 
 
-STORAGE_PATH = "output"
-VIDEOS_PATH = "videos"
 MEMEGEN_HOST = "http://localhost:8082"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
@@ -154,15 +152,17 @@ def generate_meme_sync(
     video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
     image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
-) -> MemeResponse:
-    return asyncio.run(
-        generate_meme(
-            query=query,
-            model_name=model_name,
-            generate_prompt_path=generate_prompt_path,
-            video_templates_count=video_templates_count,
-            image_templates_count=image_templates_count,
-            generated_meme_count=generated_meme_count,
+) -> None:
+    print(
+        asyncio.run(
+            generate_meme(
+                query=query,
+                model_name=model_name,
+                generate_prompt_path=generate_prompt_path,
+                video_templates_count=video_templates_count,
+                image_templates_count=image_templates_count,
+                generated_meme_count=generated_meme_count,
+            )
         )
     )
 

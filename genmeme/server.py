@@ -7,7 +7,8 @@ from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 
-from genmeme.gen import generate_meme, STORAGE_PATH
+from genmeme.files import STORAGE_PATH
+from genmeme.gen import generate_meme
 from genmeme.db import ImageRecord, SessionLocal
 
 
