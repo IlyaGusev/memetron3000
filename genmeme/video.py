@@ -28,7 +28,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
             font_size = 20
             break
 
-    text_y_position = (desired_box_height - text_clip.size[1]) // 2 + padding // 2
+    text_y_position = (desired_box_height - text_clip.size[1]) // 2 + padding // 2 + 10
     text_bg_height = (desired_box_height + padding // 2) // 2 * 2
 
     text_clip = text_clip.set_position(("center", text_y_position))
