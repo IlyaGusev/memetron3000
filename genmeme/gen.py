@@ -80,7 +80,7 @@ async def generate_meme(
     random.shuffle(meme_templates)
 
     for template in meme_templates:
-        if not isinstance(template["example"]["text"], str):
+        if "example" in template and not isinstance(template["example"]["text"], str):
             template["example"]["text"] = json.dumps(
                 template["example"]["text"], ensure_ascii=False
             )

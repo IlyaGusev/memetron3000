@@ -47,7 +47,7 @@ def create_meme_video(video_path: str, output_path: str, caption_text: str) -> N
             text_clip,
             video.set_position((0, text_bg_height)),  # Position video below caption
         ],
-    ).subclip(0, min(video.duration, 12))
+    ).subclip(0, min(video.duration, 13))
 
     final.write_videofile(
         output_path,
