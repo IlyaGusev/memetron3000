@@ -30,8 +30,8 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
     template_lose_counts: Dict[str, int] = Counter()
     template_tie_counts: Dict[str, int] = Counter()
     template_bad_tie_counts: Dict[str, int] = Counter()
-    lose_examples: Deque[Any] = deque(maxlen=10)
-    win_examples: Deque[Any] = deque(maxlen=10)
+    lose_examples: Deque[Any] = deque(maxlen=20)
+    win_examples: Deque[Any] = deque(maxlen=20)
     template_win_examples = defaultdict(list)
 
     curent_timestamp = datetime.utcnow()
@@ -63,38 +63,27 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
                 label = "TIE_BAD"
             else:
                 label = "LOSE"
-        else:
-            print(f"Skipping {timestamp}")
 
         if label == "WIN":
             global_wins_count += 1
             template_win_counts[template] += 1
             win_examples.append(r)
-            if (
-                r.query
-                and template in templates
-                and "query_examples" not in templates[template]
-            ):
+            if template in templates:
                 template_win_examples[template].append(r)
         elif label == "TIE":
             global_ties_count += 1
             template_tie_counts[template] += 1
-            if (
-                r.query
-                and template in templates
-                and "query_examples" not in templates[template]
-            ):
+            win_examples.append(r)
+            if template in templates:
                 template_win_examples[template].append(r)
         elif label == "TIE_BAD":
             global_bad_ties_count += 1
             template_bad_tie_counts[template] += 1
-            if r.query:
-                lose_examples.append(r)
+            lose_examples.append(r)
         elif label == "LOSE":
             global_lose_count += 1
             template_lose_counts[template] += 1
-            if r.query:
-                lose_examples.append(r)
+            lose_examples.append(r)
 
         if r.label not in ("WIN", "TIE", "TIE_BAD", "LOSE") and label != "UNDEFINED":
             r.label = label
@@ -117,8 +106,8 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
         all_count = wins + loses + ties + bad_ties
         true_winrate = (wins + ties) / all_count if all_count != 0 else 0
         template_win_rates[template] = (
-            wins / (wins + loses) if wins + loses != 0 else 0,
             true_winrate,
+            wins / (wins + loses) if wins + loses != 0 else 0,
             wins + loses,
             wins + loses + ties + bad_ties,
         )
@@ -137,7 +126,9 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
             continue
         query = r.query.replace("\n", " ")
         meme = r.image_url.replace("\n", " ")
-        print(f"PROMPT: {query}, MEME: {meme}, URL: {r.public_url}")
+        print(
+            f"TS: {r.created_at}, PROMPT: {query}, TEMPLATE: {r.template_id}, CAPTIONS: {r.captions}, URL: {r.public_url}"
+        )
 
     print()
     print("LOSE examples:")
@@ -146,18 +137,21 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
             continue
         query = r.query.replace("\n", " ")
         meme = r.image_url.replace("\n", " ")
-        print(f"PROMPT: {query}, MEME: {meme}, URL: {r.public_url}")
+        print(
+            f"TS: {r.created_at}, PROMPT: {query}, TEMPLATE: {r.template_id}, CAPTIONS: {r.captions}, URL: {r.public_url}"
+        )
 
-    for template, examples in template_win_examples.items():
-        print()
-        print(template)
-        for r in examples[-5:]:
-            if not r.query:
-                continue
-            query = r.query.replace("\n", " ")
-            captions = r.image_url.replace("\n", " ").split("/")[5:]
-            meme = str([c.replace("_", " ") for c in captions])
-            print(f"PROMPT: {query}, MEME: {meme}, URL: {r.public_url}")
+    if False:
+        for template, examples in template_win_examples.items():
+            print()
+            print(template)
+            for r in examples[-5:]:
+                if not r.query:
+                    continue
+                query = r.query.replace("\n", " ")
+                captions = r.image_url.replace("\n", " ").split("/")[5:]
+                meme = str([c.replace("_", " ") for c in captions])
+                print(f"PROMPT: {query}, MEME: {meme}, URL: {r.public_url}")
 
     db.close()
 
