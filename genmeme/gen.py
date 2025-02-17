@@ -16,7 +16,7 @@ from genmeme.anthropic_wrapper import anthropic_completion
 from genmeme.video import create_meme_video
 
 
-MEMEGEN_HOST = "http://localhost:8082"
+MEMEGEN_HOST = "http://localhost:5000"
 ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
 DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
