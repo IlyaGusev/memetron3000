@@ -5,21 +5,22 @@ import json
 import time
 import uuid
 from dataclasses import dataclass
+from pathlib import Path
 
 from jinja2 import Template
 import aiofiles
 import aiohttp
 import fire  # type: ignore
 
-from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH, STORAGE_PATH, VIDEOS_PATH
+from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH, STORAGE_PATH, VIDEOS_PATH, PROMPT_PATH
 from genmeme.anthropic_wrapper import anthropic_completion
 from genmeme.video import create_meme_video
 
 
-MEMEGEN_HOST = "http://localhost:5000"
-ALL_MEME_TEMPLATES = json.loads(TEMPLATES_PATH.read_text())
+MEMEGEN_HOST = "http://localhost:5051"
+DEFAULT_TEMPLATES_PATH = TEMPLATES_PATH
 DEFAULT_MODEL_NAME = "claude-3-5-sonnet-20241022"
-DEFAULT_GENERATE_PROMPT_PATH = str((PROMPTS_DIR_PATH / "gen.jinja").resolve())
+DEFAULT_GENERATE_PROMPT_PATH = PROMPT_PATH
 DEFAULT_VIDEO_TEMPLATES_COUNT = 4
 DEFAULT_IMAGE_TEMPLATES_COUNT = 2
 DEFAULT_GENERATED_MEME_COUNT = 3
@@ -58,13 +59,14 @@ async def download_file(url: str, file_path: str) -> bool:
 async def generate_meme(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
+    templates_path: str = DEFAULT_TEMPLATES_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
     image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
     generated_meme_count: int = DEFAULT_GENERATED_MEME_COUNT,
 ) -> MemeResponse:
     random.seed(time.time())
-    all_templates = ALL_MEME_TEMPLATES
+    all_templates = json.loads(Path(templates_path).read_text())
 
     video_templates = [t for t in all_templates if t.get("type", "image") == "video"]
     image_templates = [t for t in all_templates if t.get("type", "image") == "image"]
@@ -155,6 +157,7 @@ async def generate_meme(
 def generate_meme_sync(
     query: str,
     generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
+    templates_path: str = DEFAULT_TEMPLATES_PATH,
     model_name: str = DEFAULT_MODEL_NAME,
     video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
     image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
@@ -166,6 +169,7 @@ def generate_meme_sync(
                 query=query,
                 model_name=model_name,
                 generate_prompt_path=generate_prompt_path,
+                templates_path=templates_path,
                 video_templates_count=video_templates_count,
                 image_templates_count=image_templates_count,
                 generated_meme_count=generated_meme_count,

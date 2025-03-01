@@ -1,0 +1,859 @@
+[
+    {
+        "id": "bender",
+        "name": "I'm Going to Build My Own Theme Park",
+        "example": {
+            "text": [
+                "i'm going to build my own theme park",
+                "with blackjack and hookers"
+            ]
+        },
+        "description": "A frame from the animated series 'Futurama', where the robot Bender says: 'I'll build my own amusement park with blackjack and hookers!'. Used as a template for jokes about creating an alternative version of something due to dissatisfaction with the original.",
+        "query_examples": [{
+            "query": "Not hacks, but advanced architectural solutions",
+            "captions": [
+                "I'll build my own architecture",
+                "With microservices and patterns"
+            ]
+        }, {
+            "query": "The Chief Rabbi of Russia named his favorite rapper — it's Djigan.",
+            "captions": [
+                "I'll create my own rap festival",
+                "With rabbis and chuppah"
+            ]
+        }]
+    },
+    {
+        "id": "bilbo",
+        "name": "Why Shouldn't I Keep It",
+        "example": {
+            "text": [
+                "After all... why not?",
+                "Why shouldn't I post cringe?"
+            ]
+        },
+        "description": "Two frames from 'The Lord of the Rings' movie, where Bilbo Baggins holds the ring and with a suspicious/greedy expression puts on the Ring of Power. Used for jokes about reluctance to share something or part with something.",
+        "query_examples": [{
+            "query": "Twilight memes",
+            "captions": [
+                "Found out he's a vampire...",
+                "Why not start dating him?"
+            ]
+        }]
+    },
+    {
+        "id": "chair",
+        "name": "American Chopper Argument",
+        "example": {
+            "text": [
+                "Let's expand safety nets",
+                "Socialism never works!",
+                "Scandinavia is socialist and they're doing great!",
+                "They're not socialist. They're capitalist with strong welfare policies!",
+                "Then let's adopt those!",
+                "No that's socialism!!"
+            ]
+        },
+        "description": "The meme consists of 6 panels with screenshots from the reality show American Chopper, where father and son Teutul emotionally argue. The format is used to depict various disputes, where each panel contains a new argument from the discussion participants. There are two arguers, their lines alternate.",
+        "query_examples": [{
+            "query": "My husband doesn't understand how I, a Russian person, can eat avocado",
+            "captions": [
+                "Avocado is not Russian food!",
+                "Well, potatoes are from South America!",
+                "But potatoes have become ours!",
+                "Like tomatoes and cucumbers from Asia",
+                "Well, that's different!",
+                "You just haven't tried guacamole"
+            ]
+        }]
+    },
+    {
+        "id": "db",
+        "name": "Distracted Boyfriend",
+        "example": {
+            "text": [
+                "New game on sale",
+                "Me",
+                "50 unfinished games in Steam"
+            ]
+        },
+        "description": "A meme based on a stock photo taken by Spanish photographer Antonio Guillem. The photo depicts three people: a guy walking hand in hand with a girl but demonstratively turning around to look at another girl; his girlfriend looking at his behavior with indignation; and the girl in red passing by, whom the guy is staring at. The meme is used to illustrate various situations related to choice, infidelity, or shifting attention. The first caption is on the girl in red, the second caption is on the guy, the third caption is on the upset girlfriend.",
+        "query_examples": [{
+            "query": "Kesha said he's writing his term paper, but he's playing Roblox",
+            "captions": [
+                "Roblox",
+                "Kesha",
+                "Unfinished term paper"
+            ]
+        }, {
+            "query": "games in steam",
+            "captions": [
+                "New game on sale",
+                "Me",
+                "50 unfinished games in Steam"
+            ]
+        }]
+    },
+    {
+        "id": "drake",
+        "name": "Drakeposting",
+        "example": {
+            "text": [
+                "writing an essay based on the book",
+                "writing an essay based on the summary"
+            ]
+        },
+        "description": "Top panel: Drake turns away and raises his hand in a rejecting gesture. Bottom panel: Drake smiles and points at something with approval",
+        "query_examples": [{
+            "query": "The US Treasury transfers $100 billion annually to unidentified individuals, Elon Musk said",
+            "captions": [
+                "Verifying the identity of benefit recipients",
+                "Giving money to anyone who says 'give me money'"
+            ]
+        }, {
+            "query": "literature class",
+            "captions": [
+                "writing an essay based on the book",
+                "writing an essay based on the summary"
+            ]
+        }]
+    },
+    {
+        "id": "ds",
+        "name": "Daily Struggle",
+        "example": {
+            "text": [
+                "Finish the series overnight",
+                "Get enough sleep before an important meeting",
+                "3 AM"
+            ]
+        },
+        "description": "At the top of the meme is a panel with two red buttons. The bottom panel shows a character in red clothes who is nervous and wiping sweat from his forehead, experiencing stress from the need to choose. The first two captions are for the buttons, the last one is for additional description of the situation (optional).",
+        "query_examples": [{
+            "query": "Kirill is very annoying",
+            "captions": [
+                "Stay silent and keep friends",
+                "Explain why their opinion is wrong with 40 proofs",
+                "Kirill at a party"
+            ]
+        }, {
+            "query": "I love TV series",
+            "captions": [
+                "Finish the series overnight",
+                "Get enough sleep before an important meeting",
+                "3 AM"
+            ]
+        }]
+    },
+    {
+        "id": "elmo",
+        "name": "Elmo Choosing Cocaine",
+        "example": {
+            "text": [
+                "Historical Accuracy",
+                "History Channel",
+                "Aliens",
+                "Historical Accuracy"
+            ]
+        },
+        "description": "Frames with a 'Sesame Street' character. First frame: Elmo sits at a table with fruits and white powder (presumably flour/sugar for comic effect). Second frame: Elmo lies face down in this powder, thus choosing it. The meme is used for jokes about addiction to something or excessive enthusiasm for something. It's important to note that this is a comedy meme with a children's toy, and the white powder in the original video is a harmless substance like flour or sugar, used to create a comic effect. The first and last captions are for fruits, they should match. The second caption is for Elmo. The third caption is for the powder.",
+        "query_examples": [{
+            "query": "Tisha is like winning the lottery, he can ignore for a week or engage in a 3-hour conversation",
+            "captions": [
+                "Normal communication",
+                "Tisha",
+                "Three-hour conversation at 3 AM",
+                "Normal communication"
+            ]
+        }, {
+            "query": "Our power is only over our thoughts, words and actions. That's our responsibility. The rest is not.",
+            "captions": [
+                "Normal self-care",
+                "Me",
+                "Taking responsibility for everything and everyone",
+                "Normal self-care"
+            ]
+        }]
+    },
+    {
+        "id": "gb",
+        "name": "Galaxy Brain",
+        "example": {
+            "text": [
+                "Who",
+                "Whom",
+                "Whom'st",
+                "Whomst'd"
+            ]
+        },
+        "description": "A four-panel meme showing progression. It starts with a regular portrait of a human head, then goes to images of a glowing brain, becoming brighter, the last panels show a cosmic brain. The humor is built on the fact that the stupidest ideas are presented as the most 'enlightened'.",
+        "query_examples": [{
+            "query": "Weather forecasters promise frost gardeners run to cover plantings",
+            "captions": [
+                "Cover plantings with agricultural fleece",
+                "Heat with a heat gun",
+                "Move all plants home",
+                "Move with the garden to Sochi"
+            ]
+        }, {
+            "query": "How to make a lot of money",
+            "captions": [
+                "Get a job",
+                "Start your own business",
+                "Sell a kidney",
+                "Sell both kidneys"
+            ]
+        }]
+    },
+    {
+        "id": "grave",
+        "name": "Grant Gustin Next To Oliver Queen's Grave",
+        "example": {
+            "text": [
+                "Jesus",
+                "",
+                "Jesus 3 days later"
+            ]
+        },
+        "description": "A photo from a TV series shoot, where actor Grant Gustin stands smiling and leaning on the tombstone of Oliver Queen character from the 'Arrow' series. Due to the unfortunate context (smiling at a grave), the photo became a meme. The first caption is on the tombstone, the second caption is on the grave itself (not required, almost never used), the third caption is on the actor.",
+        "query_examples": [{
+            "query": "Igor, Nikita and Diana are figuring out the rules of the Nemesis game for the fourth hour and can't start playing. Meanwhile, Artem is tearing menisci in the gym",
+            "captions": [
+                "Artem's menisci, 1995-2025",
+                "",
+                "Others who are still reading the Nemesis rules"
+            ]
+        }, {
+            "query": "bible",
+            "captions": [
+                "Jesus",
+                "",
+                "Jesus 3 days later"
+            ]
+        }]
+    },
+    {
+        "id": "gru",
+        "name": "Gru's Plan",
+        "example": {
+            "text": [
+                "Learn how to make memes.",
+                "Make a meme.",
+                "No one likes it.",
+                "No one likes it."
+            ]
+        },
+        "description": "A four-panel meme where the main character of the 'Despicable Me' movie, Gru, uses a presentation board. In the third panel, an unexpected presentation slide appears, followed by a panel where Gru looks back at the board in confusion. The content of the third and fourth captions should match. The joke is in the deception of expectations.",
+        "query_examples": [{
+            "query": "Become kind, Lisa",
+            "captions": [
+                "Talk to Lisa kindly",
+                "Ask her to be kind",
+                "Lisa became even more evil",
+                "Lisa became even more evil"
+            ]
+        }]
+    },
+    {
+        "id": "perfection",
+        "name": "Perfection",
+        "example": {
+            "text": [
+                "Sebastian Shaw",
+                "I prefer the real Darth Vader.",
+                "Hayden Christensen",
+                "I said, the real Darth Vader.",
+                "Jake Lloyd",
+                "Perfection."
+            ]
+        },
+        "description": "The 'Perfection' comic with Fassbender as Magneto consists of 6 squares and is always structured in the same way. In the first panel there is some picture, to the right of it is Fassbender, who says 'I want to see the real one'. In the second panel is a similar picture, and Fassbender says 'I said the real one!'. Finally, in the third panel, another similar picture appears, and a satisfied Fassbender says 'Perfection!'.",
+        "query_examples": [{
+            "query": "made an avatar in childhood and thought it was cool, put a watermark 'anti dick'",
+            "captions": [
+                "Copyright",
+                "Show me the real avatar protection",
+                "Watermark",
+                "I said, the real protection!",
+                "'anti dick'",
+                "Perfection"
+            ]
+        }, {
+             "query": "Kharisenok boasts about his epic wolf everywhere",
+             "captions": [
+                "Wolf from 'Game of Thrones'",
+                "Show me the real wolf",
+                "Wolf from National Geographic",
+                "I said, the real wolf!",
+                "Kharisenok's wolf",
+                "Perfection!"
+            ]
+        }]
+    },
+    {
+        "id": "pooh",
+        "name": "Tuxedo Winnie the Pooh",
+        "example": {
+            "text": [
+                "I work at McDonald's",
+                "I work part-time in the fast food industry"
+            ]
+        },
+        "description": "A meme featuring two images of Winnie the Pooh: a simple, classic image of the bear at the top and Winnie the Pooh in a tuxedo with a haughty/aristocratic expression at the bottom. The meme is used to compare ordinary and 'pretentious' versions of the same concept, where the second option represents a more complex, fancy, or 'intellectual' version of the first.",
+        "query_examples": [{
+            "query": "\"The global goal is to optimize the expenditure part\" — this is the vector that sellers set.",
+            "captions": [
+                "Sell more, spend less",
+                "Implement a strategy of outpacing category growth while optimizing operational costs and improving unit economics"
+            ]
+        }, {
+            "query": "hacks in code",
+            "captions": [
+                "Hacks in code",
+                "Temporary architectural solutions to ensure backward compatibility"
+            ]
+        }]
+    },
+    {
+        "id": "ptj",
+        "name": "Phoebe Teaching Joey",
+        "example": {
+            "text": [
+                "We",
+                "We",
+                "stick",
+                "stick",
+                "together",
+                "together",
+                "We stick together!",
+                "We should split up!"
+            ]
+        },
+        "description": "A meme from Friends. In the original, polyglot Phoebe tries to teach Joey French. After conducting several trial lessons, Buffay realized that Tribbiani was not a good student, so she suggested he learn individual phrases syllable by syllable. But in the end, Joey produces a completely different phrase.",
+        "query_examples": [{
+            "query": "horror movie",
+            "captions": [
+                "We",
+                "We",
+                "stick",
+                "stick",
+                "together",
+                "together",
+                "We stick together!",
+                "We should split up!"
+            ]
+        }]
+    },
+    {
+        "id": "reveal",
+        "name": "Scooby Doo Reveal",
+        "example": {
+            "text": [
+                "Useful tutorial on YouTube",
+                "Let's see who you really are...",
+                "40 minutes of fluff",
+                "I knew it!"
+            ]
+        },
+        "description": "The meme is based on a classic moment from the 'Scooby-Doo' cartoon series, where the team tears off the mask from a villain to reveal his true identity.",
+        "query_examples": [{
+            "query": "Gardeners are the best meteorologists",
+            "captions": [
+                "Weather forecast from the meteorological center",
+                "Let's see who you really are...",
+                "Grandma who predicted everything by ants and dandelions",
+                "I knew it!"
+            ]
+        }, {
+            "query": "I can play the doctor",
+            "captions": [
+                "'I'm a doctor, I can help!'",
+                "Let's see who we have here...",
+                "15 seasons of 'Grey's Anatomy'",
+                "I knew it!"
+            ]
+        }]
+    },
+    {
+        "id": "twodoges",
+        "name": "Swole Doge vs. Cheems",
+        "example": {
+            "text": [
+                "Priest 1450",
+                "I burnt 15 witches",
+                "Priest 2020",
+                "I'm afraid of gays"
+            ]
+        },
+        "description": "Comparison of two Shiba Inu dogs. Doge is a strong, confident dog with a characteristic grin/smirk. Cheems is a clumsy dog with puffy cheeks and a confused expression. The meme is used for comparison: past and present, ideal and reality, professional and novice. 1st and 3rd captions are for the dogs themselves, 2nd and 4th for their statements. First come Doge's captions, then Cheems'.",
+        "query_examples": [{
+            "query": "The Ministry of Labor confirmed the shortage of software developers in Russia",
+            "captions": [
+                "HR in 2020",
+                "Oh, these programmers are a dime a dozen",
+                "HR in 2024",
+                "Please, at least a junior, I'll get on my knees!"
+            ]
+        }, {
+            "query": "Apartment for rent",
+            "captions": [
+                "Apartment in the photo",
+                "180 m², renovated, park view",
+                "Apartment when viewing",
+                "18 m², Euro-mold, garbage view"
+            ]
+        }]
+    },
+    {
+        "id": "vince",
+        "name": "Vince McMahon Reaction",
+        "example": {
+            "text": [
+                "Passed the exam",
+                "Passed with excellence",
+                "The only one in the group"
+            ]
+        },
+        "description": "The meme consists of 3 sequential images where Vince McMahon (WWE owner) shows increasingly strong excitement and delight: from slight interest to complete ecstasy.",
+        "query_examples": [{
+            "query": "In the market among candlemakers there is a severe shortage of quality wax",
+            "captions": [
+                "Found out about the wax shortage",
+                "Remembered uncle's apiary",
+                "Bought all the beehives in the area"
+            ]
+        }, {
+            "query": "exam",
+            "captions": [
+                "Passed the exam",
+                "Passed with excellence",
+                "The only one in the group"
+            ]
+        }]
+    },
+    {
+        "id": "woman-cat",
+        "name": "Woman Yelling at a Cat",
+        "example": {
+            "text": [
+                "Mom telling me how useless I am",
+                "12 year old me playing Minecraft"
+            ]
+        },
+        "description": "Left: a frame from a reality show where Taylor Armstrong emotionally shouts and points, while her friend tries to calm her down. Right: a photo of a white cat named Smudge, who sits at a table with a plate of salad and looks confused/displeased. The meme went viral due to the funny contrast between the woman's aggressive shouting and the confused/indifferent expression on the cat's face. It's usually used to create dialogues where the first person emotionally proves something, and the cat imperturbably responds or just puzzled.",
+        "query_examples": [{
+            "query": "ezhypalka",
+            "captions": [
+                "HEDGEHOG IS SPELLED WITH E AND I!",
+                "ezhypalka"
+            ]
+        }, {
+            "query": "Lena, Katya and Yulia miss colleague Ira",
+            "captions": [
+                "IRAAAA, IT'S SO BORING HERE WITHOUT YOU, COME BACK!!!",
+                "Ira in a new office with twice the salary"
+            ]
+        }]
+    },
+    {
+        "id": "chill",
+        "name": "Just a Chill Guy",
+        "example": {
+            "text": [
+                "Me when I get a low SAT score but I remember",
+                "I'm a chill guy who low-key doesn't GAF"
+            ]
+        },
+        "description": "A meme about a funny anthropomorphic dog, drawn in a cartoon style. The hero is dressed in a gray longsleeve, jeans with cuffs, and red sneakers. The main feature of the character is a calm look and a slight half-smile. The chill guy looks maximally relaxed and serene - this emotion is what turned the funny picture into a meme.",
+        "query_examples": [{
+            "query": "Dolphin killings in a positive light",
+            "captions": [
+                "When I accidentally harpooned a dolphin, but remembered",
+                "That they rape fish and deserve it"
+            ]
+        }, {
+            "query": "exams",
+            "captions": [
+                "Got 50 points on the Unified State Exam, but remembered",
+                "That I'm just a chill guy and I don't care"
+            ]
+        }]
+    },
+    {
+        "id": "dramatic-dmitry",
+        "name": "Dramatic Dmitry",
+        "type": "image",
+        "example": {
+            "text": [
+                "The most painful thing when I go to school...",
+                "Forgetting to bring my headphones"
+            ]
+        },
+        "description": "The meme includes several images where a man expresses sadness on a beach. On the cover, he thoughtfully lets sand run through his fingers; sits on his knees with outstretched arms, looking at the sky; and takes other poses demonstrating despair. Can be used in different sad situations.",
+        "query_examples": [{
+            "query": "children's toys",
+            "captions": [
+                "Decided to buy a car",
+                "only had enough money for an inertial toy"
+            ]
+        }, {
+            "query": "life situation",
+            "captions": [
+                "When I went to school",
+                "but forgot my headphones at home"
+            ]
+        }]
+    },
+    {
+        "id": "astrologers",
+        "name": "Astrologers Declared Week of X",
+        "example": {
+            "text": [
+                "Astrologers declared the week of DiCaprio",
+                "The number of jokes about the Oscar tripled"
+            ]
+        },
+        "description": "In Heroes 3, at the beginning of each week, it is reported that astrologers have declared the week of X, where X can be one of the monsters, just a meaningless name, or the plague. If it's a monster week, there's a chance that monsters appear on the entire map as neutrals, and their growth in castles doubles. It has nothing to do with astrology, but for humor and reference to the game, they say they declared the week of X, and now everyone is interested in X. In fact, X is just another hyped topic that everyone is talking about.",
+        "query_examples": [{
+            "query": "Why does Lisa like this model-making so much that she even likes sniffing glue from the star",
+            "captions": [
+                "Astrologers declared the week of the 'Star' kit",
+                "The number of glue-sniffing modelers tripled"
+            ]
+        }, {
+            "query": "actors",
+            "captions": [
+                "Astrologers declared the week of DiCaprio",
+                "The number of jokes about the Oscar tripled"
+            ]
+        }]
+    },
+    {
+        "id": "handshake",
+        "name": "Epic Handshake",
+        "example": {
+            "text": [
+                "me making these meme",
+                "you seeing this meme",
+                "us wasting time"
+            ]
+        },
+        "description": "A macro meme with a handshake of muscular black and white arms. The meme is used to demonstrate unexpected unanimity of usually dissimilar individuals or groups on some particular issue – often on the ground of common dislike for a third group. The third caption is usually some action.",
+        "query_examples": [{
+            "query": "Wanted to become a senior, now I want to become a neural network",
+            "captions": [
+                "Seniors who can't explain how they solve problems",
+                "Neural networks that can't explain how they solve problems",
+                "Brilliant solutions"
+            ]
+        }]
+    },
+    {
+        "id": "impatient_puppy",
+        "type": "video",
+        "name": "Very impatient puppy",
+        "description": "Video meme: a puppy sits on a tile, moving its paws impatiently.",
+        "example": {
+            "text": [
+                "This is me at the pickup point waiting for my hundred of orders"
+            ]
+        },
+        "query_examples": [{
+            "query": "Where do you see yourself in 5 years? Bright future: I'll become Chuck Tingle, dark future the Unabomber",
+            "captions": [
+                "Me waiting to finally become either a famous writer of erotic stories about space unicorns or a hermit with a manifesto:"
+            ]
+        }, {
+            "query": "wildberries",
+            "captions": [
+                "This is me at the pickup point waiting for my hundred of orders"
+            ]
+        }]
+    },
+    {
+        "id": "money_collection",
+        "type": "video",
+        "name": "Money collection",
+        "description": "Video meme: a man in a green robe sits on a carpet, other people bring him money/papers. Indian music plays in the background.",
+        "example": {
+            "text": [
+                "OpenAI after releasing ChatGPT"
+            ]
+        },
+        "query_examples": [{
+           "query": "Elon Musk launches X Money payment service in partnership with Visa",
+           "captions": [
+                "Mastercard after the failure of Musk and Visa's joint project:"
+            ]
+        }, {
+            "query": "language models",
+            "captions": [
+                "OpenAI after releasing ChatGPT"
+            ]
+        }]
+    },
+    {
+        "id": "rock_clown",
+        "type": "video",
+        "name": "Rock and kids",
+        "description": "Video meme: Little girls are decorating The Rock Dwayne Johnson with cosmetics and paints and sticking stickers on him. The Rock himself has a suffering expression on his face, with sad 'Hello Darkness, my old friend' playing in the background",
+        "example": {
+            "text": [
+                "Me after agreeing to a 'quick meeting' with relatives:"
+            ]
+        },
+        "query_examples": [{
+            "query": "lawyer without experience tries to win a dispute with the wildberries marketplace",
+            "captions": [
+                "Lawyer without experience when Wildberries lawyers tear his arguments apart point by point:"
+            ]
+        }, {
+            "query": "relatives",
+            "captions": [
+                "Me after agreeing to a 'quick meeting' with relatives:"
+            ]
+        }]
+    },
+    {
+        "id": "girl_man_crowd",
+        "type": "video",
+        "name": "Girl running from the man crowd",
+        "description": "Video meme: desert/steppe, a girl in a red dress running away from a crowd of men in black, Indian music playing in the background. The meme is suitable for depicting avoidance of problems/responsibilities.",
+        "example": {
+            "text": [
+                "Me trying to fall asleep. Also all my stupid ideas and awkward moments from the last 10 years:"
+            ]
+        },
+        "query_examples": [{
+            "query": "Comrades, let's agree not to add any bots to the chat without the consent of all chat members",
+            "captions": [
+                "Me trying to read important messages in the chat. Also bots that everyone added 'just to see what they can do':"
+            ]
+        }, {
+            "query": "can't sleep",
+            "captions": [
+                "Me trying to fall asleep. Also all my stupid ideas and awkward moments from the last 10 years:"
+            ]
+        }]
+    },
+    {
+        "id": "husky_360",
+        "type": "video",
+        "name": "Guilty Husky 360 degrees",
+        "description": "Video meme. The camera is fixed under the husky's nose and faces its muzzle, which distorts the image and makes the husky look very guilty",
+        "example": {
+            "text": [
+                "Friend asked where the second part of his sandwich went. Me:"
+            ]
+        },
+        "query_examples": [{
+            "query": "Preparing for Communication Training",
+            "captions": [
+                "When they said at the communication training: 'Now everyone will talk about themselves for 5 minutes'"
+            ]
+        }, {
+            "query": "I ate my friend's sandwich",
+            "captions": [
+                "Friend asked where the second part of his sandwich went. Me:"
+            ]
+        }]
+    },
+    {
+        "id": "shredder",
+        "type": "video",
+        "name": "Shredder",
+        "description": "Video meme. Dua Lipa, a girl in a white fur coat, reads a card, is surprised, puts the card in a shredder, while shaking her head. At the same time, she seems somewhat pleased. A meme about sweet revenge.",
+        "example": {
+            "text": [
+                "The person who didn't hire you a year ago sent a resume to your company:"
+            ]
+        },
+        "query_examples": [{
+            "query": "CONNECT 381 WITH UP TO 50% DISCOUNT Home internet, TV and mobile communications Season hit! 'Family' tariff Internet 500 Mbps",
+            "captions": [
+                "When the provider you left a year ago due to poor service sent an offer to connect with a 50% discount"
+            ]
+        }, {
+            "query": "getting a job",
+            "captions": [
+                "The person who didn't hire you a year ago sent a resume to your company:"
+            ]
+        }]
+    },
+    {
+        "id": "asian_girl_beating",
+        "type": "video",
+        "name": "Asian girl beating into the camera",
+        "description": "Video meme. An Asian girl punches towards the camera.",
+        "example": {
+            "text": [
+                "When you invited her to the cinema, but she wanted to go to a hookah lounge"
+            ]
+        },
+        "query_examples": [{
+            "query": "Manager's thoughts: I think my employees really love getting new tasks on Monday morning.",
+            "captions": [
+                "Employees who received 20 new tasks on Monday at 9:00"
+            ]
+        }, {
+            "query": "perfect girl",
+            "captions": [
+                "When you invited her to the cinema, but she wanted to go to a hookah lounge"
+            ]
+        }]
+    },
+    {
+        "id": "rock_tasty_cake",
+        "type": "video",
+        "name": "Rock Dwayne Johnson eating the cake",
+        "description": "Video meme. The bald actor Dwayne 'The Rock' Johnson is eating cake. He definitely really likes it, he looks at the camera with satisfaction and smacks his lips.",
+        "example": {
+            "text": [
+                "Programmer when the client accepted the work without revisions:"
+            ]
+        },
+        "query_examples": [{
+            "query": "A Moscow woman accidentally sucked a snake into her vacuum cleaner during cleaning, which had crawled into her apartment.",
+            "captions": [
+                "Vacuum cleaner when it sucked up a snake instead of dust:"
+            ]
+        }, {
+            "query": "freelance programmer",
+            "captions": [
+                "Programmer when the client accepted the work without revisions:"
+            ]
+        }]
+    },
+    {
+        "id": "tom_not_sleeping",
+        "type": "video",
+        "name": "Barely not sleeping Tom",
+        "description": "Video meme from the cartoon 'Tom and Jerry'. Tom can't open his eyes and wants to sleep, but he needs to pretend he's not sleeping, so he sticks his eyelids to his forehead with tape.",
+        "example": {
+            "text": [
+                "'Cool, you work for yourself, free schedule'. My free schedule:"
+            ]
+        },
+        "query_examples": [{
+            "query": "Yulia is studying to be a graphic designer and simultaneously works as an administrator at the Tonus medical clinic",
+            "captions": [
+                "'It's convenient - you receive patients in the morning, do design in the evening'. Me at 11 PM trying to work in Photoshop:"
+            ]
+        }, {
+            "query": "free schedule",
+            "captions": [
+                "'Cool, you work for yourself, free schedule'. My free schedule:"
+            ]
+        }]
+    },
+    {
+        "id": "small-brain-vs-big-brain",
+        "type": "image",
+        "name": "Small Brain Man Screaming at Big Brain Man",
+        "description": "In the cartoon-style image, a person with a small brain angrily shouts at a person with a big brain. The meme has two captions, the first caption from the shouting person with a small brain, the second from the calm person with a big brain.",
+        "example": {
+            "text": [
+                "Deepseek illegally uses our American developments! This is theft, we will sue!",
+                "ok, let's check what your models were trained on"
+            ]
+        },
+        "query_examples": [{
+            "query": "China Communist Party accept Jesus Christ",
+            "captions": [
+                "Communism and Christianity are completely different things! You can't mix them!",
+                "Helping the poor and fighting the rich"
+            ]
+        }, {
+            "query": "OpenAI accuses DeepSeek of data theft",
+            "captions": [
+                "Deepseek illegally uses our American developments! This is theft, we will sue!",
+                "ok, let's check what your models were trained on"
+            ]
+        }]
+    },
+    {
+        "id": "squid-before-after",
+        "type": "image",
+        "name": "Squid Games main character Before|After",
+        "description": "Two-panel meme, on the first panel smiling Ki Hun from the first season of Squid Game, on the second panel the same character, but darkened and slightly aged from the second season. A classic before/after meme.",
+        "example": {
+            "text": [
+                "Before mom's haircut",
+                "After mom's haircut"
+            ]
+        },
+        "query_examples": [{
+            "query": "shaved bald",
+            "captions": [
+                "Before mom's haircut",
+                "After mom's haircut"
+            ]
+        }]
+    },
+    {
+        "id": "ufc_commentators_reaction",
+        "type": "video",
+        "name": "UFC commentators KO reaction",
+        "description": "Video meme where 3 commentators in a booth enthusiastically rejoice and are surprised by a KO in a UFC fight. Specific words are not audible, but they have a very, very strong positive reaction. Can be used in situations when something very good happens.",
+        "example": {
+            "text": [
+                "My ancestors who saw me talking to a woman for the first time:"
+            ]
+        },
+        "query_examples": [{
+            "query": "In Samara, a 71-year-old pensioner gave scammers 421 million rubles. The pensioner, of course, is not ordinary, but the former head of the Samara Region Development Corporation.",
+            "captions": [
+                "Scammers when they found out they scammed not an ordinary pensioner, but the ex-head of the Development Corporation:"
+            ]
+        }, {
+            "query": "came on a date",
+            "captions": [
+                "My ancestors who saw me talking to a woman for the first time:"
+            ]
+        }]
+    },
+    {
+        "id": "snowfall",
+        "type": "video",
+        "name": "Snowfall scene with Gosling from Bladerunner 2049",
+        "description": "Video meme from Blade Runner 2049. Snow is falling, Ryan Gosling's character in a coat sits on the stairs of a building, looks first at his hand, then at the sky. Then slowly lies down on the stairs, as if preparing for death. The meme conveys a very sad and melancholic mood",
+        "example": {
+            "text": [
+                "When schoolchildren are already doing business with ChatGPT, and you're still googling 'how to write a resume':"
+            ]
+        },
+        "query_examples": [{
+            "query": "According to statistics, 70% of ChatGPT users are under 25 years old",
+            "captions": [
+                "When schoolchildren are already doing business with ChatGPT, and you're still googling 'how to write a resume':"
+            ]
+        }, {
+            "query": "Russian exchangers closed due to a sharp collapse in the dollar exchange rate.",
+            "captions": [
+                "When you bought a dollar at 110, and it fell to 90:"
+            ]
+        }]
+    },
+    {
+        "id": "giraffes",
+        "type": "video",
+        "name": "A small giraffe sitting on a neck of a big giraffe",
+        "description": "Video meme with two giraffes. The small giraffe sits on the neck of the big giraffe. The big giraffe holds it. Can be used in situations where someone relies on someone and someone helps someone else very much.",
+        "example": {
+            "text": [
+                "Senior developer carries you through your first week at work:"
+            ]
+        },
+        "query_examples": [{
+            "query": "programmers",
+            "captions": [
+                "Senior developer carries you through your first week at work:"
+            ]
+        }, {
+            "query": "mom",
+            "captions": [
+                "My child always when I need to do something:"
+            ]
+        }]
+    }
+]
