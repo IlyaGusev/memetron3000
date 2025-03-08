@@ -59,7 +59,7 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
 
     db = SessionLocal()
     db_record = ImageRecord(
-        result_id=request.result_id,
+        result_id=request.result_id + 500000,
         image_url=response.image_url,
         public_url=public_url,
         query=request.prompt,

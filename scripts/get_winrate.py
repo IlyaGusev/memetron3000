@@ -112,7 +112,6 @@ def get_stats(nrows: Optional[int] = None, refresh_hours: int = 48) -> None:
             wins + loses + ties + bad_ties,
         )
 
-
     for name, (tie_winrate, winrate, count, count_w_ties) in sorted(
         template_win_rates.items(), key=lambda x: x[1]
     ):

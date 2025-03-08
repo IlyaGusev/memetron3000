@@ -12,7 +12,7 @@ import aiofiles
 import aiohttp
 import fire  # type: ignore
 
-from genmeme.files import TEMPLATES_PATH, PROMPTS_DIR_PATH, STORAGE_PATH, VIDEOS_PATH, PROMPT_PATH
+from genmeme.files import TEMPLATES_PATH, STORAGE_PATH, VIDEOS_PATH, PROMPT_PATH
 from genmeme.anthropic_wrapper import anthropic_completion
 from genmeme.video import create_meme_video
 
