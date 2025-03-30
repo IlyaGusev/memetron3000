@@ -58,8 +58,8 @@ async def download_file(url: str, file_path: str) -> bool:
 
 async def generate_meme(
     query: str,
-    generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
-    templates_path: str = DEFAULT_TEMPLATES_PATH,
+    generate_prompt_path: str = str(DEFAULT_GENERATE_PROMPT_PATH),
+    templates_path: str = str(DEFAULT_TEMPLATES_PATH),
     model_name: str = DEFAULT_MODEL_NAME,
     video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
     image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,
@@ -156,8 +156,8 @@ async def generate_meme(
 
 def generate_meme_sync(
     query: str,
-    generate_prompt_path: str = DEFAULT_GENERATE_PROMPT_PATH,
-    templates_path: str = DEFAULT_TEMPLATES_PATH,
+    generate_prompt_path: str = str(DEFAULT_GENERATE_PROMPT_PATH),
+    templates_path: str = str(DEFAULT_TEMPLATES_PATH),
     model_name: str = DEFAULT_MODEL_NAME,
     video_templates_count: int = DEFAULT_VIDEO_TEMPLATES_COUNT,
     image_templates_count: int = DEFAULT_IMAGE_TEMPLATES_COUNT,

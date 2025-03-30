@@ -3,7 +3,7 @@ import time
 from typing import Optional, Literal, Dict, Any
 from datetime import datetime
 
-import fire
+import fire  # type: ignore
 import uvicorn
 from pydantic import BaseModel
 from fastapi import FastAPI, Request
@@ -39,12 +39,12 @@ def get_base_url(request: Request) -> str:
 async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     start_time = time.time()
 
-    generate_prompt_path = PROMPT_PATH
+    generate_prompt_path = str(PROMPT_PATH)
     env_prompt_path = os.getenv("PROMPT_PATH")
     if env_prompt_path:
         generate_prompt_path = env_prompt_path
 
-    templates_path = TEMPLATES_PATH
+    templates_path = str(TEMPLATES_PATH)
     env_templates_path = os.getenv("TEMPLATES_PATH")
     if env_templates_path:
         templates_path = env_templates_path
@@ -59,7 +59,7 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
 
     db = SessionLocal()
     db_record = ImageRecord(
-        result_id=request.result_id + 500000,
+        result_id=request.result_id + 500000 if request.result_id else 0,
         image_url=response.image_url,
         public_url=public_url,
         query=request.prompt,
@@ -87,7 +87,7 @@ async def health_check() -> Dict[str, Any]:
 APP.mount("/output", StaticFiles(directory=STORAGE_PATH), name="output")
 
 
-def main(host: str = "0.0.0.0", port: int = 8081):
+def main(host: str = "0.0.0.0", port: int = 8081) -> None:
     uvicorn.run(APP, host=host, port=port)
 
 
