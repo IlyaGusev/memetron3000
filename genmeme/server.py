@@ -1,13 +1,15 @@
 import os
 import time
+import datetime
+import traceback
 from typing import Optional, Literal, Dict, Any
-from datetime import datetime
 
 import fire  # type: ignore
 import uvicorn
 from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
+from dotenv import load_dotenv
 
 from genmeme.files import STORAGE_PATH, PROMPT_PATH, TEMPLATES_PATH
 from genmeme.gen import generate_meme
@@ -15,11 +17,12 @@ from genmeme.db import ImageRecord, SessionLocal
 
 
 APP = FastAPI()
+NUM_RETRIES = 3
 
 
 class PredictRequest(BaseModel):
-    result_id: Optional[int] = None
     prompt: str
+    selected_template_id: Optional[str] = None
 
 
 class PredictResponse(BaseModel):
@@ -49,22 +52,28 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     if env_templates_path:
         templates_path = env_templates_path
 
-    response = await generate_meme(
-        request.prompt,
-        generate_prompt_path=generate_prompt_path,
-        templates_path=templates_path,
-    )
+    for _ in range(NUM_RETRIES):
+        try:
+            response = await generate_meme(
+                request.prompt,
+                generate_prompt_path=generate_prompt_path,
+                templates_path=templates_path,
+                selected_template_id=request.selected_template_id,
+            )
+            print(f"Response: {response}")
+            break
+        except Exception:
+            traceback.print_exc()
+
     base_url = get_base_url(req)
     public_url = f"{base_url}/output/{response.file_name}"
 
     db = SessionLocal()
     db_record = ImageRecord(
-        result_id=request.result_id + 500000 if request.result_id else 0,
-        image_url=response.image_url,
+        result_id=response.file_name.split(".")[0],
         public_url=public_url,
         query=request.prompt,
-        created_at=datetime.utcnow(),
-        captions=response.captions,
+        created_at=datetime.datetime.now(datetime.UTC),
         template_id=response.template_id,
     )
     db.add(db_record)
@@ -74,8 +83,6 @@ async def predict(request: PredictRequest, req: Request) -> PredictResponse:
     total_time = time.time() - start_time
     print(f"Total processing time: {total_time:.3f}s")
 
-    if public_url.endswith(".mp4"):
-        return PredictResponse(type="video", url=public_url)
     return PredictResponse(type="image", url=public_url)
 
 
@@ -92,4 +99,5 @@ def main(host: str = "0.0.0.0", port: int = 8081) -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv()
     fire.Fire(main)

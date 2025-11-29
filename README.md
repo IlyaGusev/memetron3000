@@ -9,20 +9,8 @@ bash download.sh
 pip3 install -r requirements.txt
 ```
 
-# Run memegen
-
-Window 1:
+# Run server
 
 ```
-cd memegen
-pip3 install .
-python3 -m app.main
-```
-
-# Run main server
-
-Window 2:
-
-```
-ANTHROPIC_API_KEY=<your_key> python3 -m genmeme.server
+OPENROUTER_API_KEY=<your_key> uv run -m genmeme.server
 ```

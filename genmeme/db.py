@@ -12,14 +12,12 @@ class Base(DeclarativeBase):
 class ImageRecord(Base):
     __tablename__ = "images"
     result_id: Mapped[str] = mapped_column(String, primary_key=True)
-    image_url: Mapped[str]
     public_url: Mapped[str]
     query: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     label: Mapped[Optional[str]] = mapped_column(
         String, nullable=True, default="UNDEFINED"
     )
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
-    captions: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     template_id: Mapped[Optional[str]] = mapped_column(String, nullable=True)
 
 

@@ -1,9 +1,9 @@
 .PHONY: black style validate test
 
 black:
-	black .
+	black genmeme
 
 validate:
-	black .
-	flake8 .
-	mypy . --strict --explicit-package-bases
+	black genmeme
+	flake8 genmeme
+	mypy genmeme --strict --explicit-package-bases
