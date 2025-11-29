@@ -23,6 +23,7 @@ class Job:
     started_at: Optional[datetime.datetime] = None
     completed_at: Optional[datetime.datetime] = None
     result_url: Optional[str] = None
+    result_template_id: Optional[str] = None
     error: Optional[str] = None
     position: int = 0
 
@@ -64,6 +65,7 @@ class QueueManager:
         job_id: str,
         status: JobStatus,
         result_url: Optional[str] = None,
+        result_template_id: Optional[str] = None,
         error: Optional[str] = None,
     ) -> None:
         job = self.jobs.get(job_id)
@@ -75,5 +77,7 @@ class QueueManager:
                 job.completed_at = datetime.datetime.now(datetime.UTC)
             if result_url:
                 job.result_url = result_url
+            if result_template_id:
+                job.result_template_id = result_template_id
             if error:
                 job.error = error

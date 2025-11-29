@@ -2,8 +2,9 @@ import os
 import random
 import json
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import List
 
 import fire  # type: ignore
 from typing import Optional
@@ -19,14 +20,14 @@ from genmeme.llm import (
 
 MEMEGEN_HOST = "http://localhost:5051"
 DEFAULT_MODEL_NAME = OPENROUTER_DEFAULT_MODEL
-DEFAULT_IMAGE_TEMPLATES_COUNT = 2
+DEFAULT_IMAGE_TEMPLATES_COUNT = 3
 MAX_QUERY_LENGTH = 600
 
 
 @dataclass
 class MemeResponse:
     file_name: str
-    template_id: str = ""
+    template_ids: List[str] = field(default_factory=list)
 
 
 async def generate_meme(
@@ -53,10 +54,12 @@ async def generate_meme(
         random.shuffle(meme_templates)
 
     meme_images = []
+    template_ids = []
     for template in meme_templates:
         meme_id = template["id"]
         file_path = os.path.join(IMAGES_PATH, f"{meme_id}.jpg")
         meme_images.append(file_path)
+        template_ids.append(meme_id)
 
     # Generate prompt
     with open(generate_prompt_path) as f:
@@ -85,7 +88,7 @@ async def generate_meme(
 
     return MemeResponse(
         file_name=output_image_path.name,
-        template_id=meme_id,
+        template_ids=template_ids,
     )
 
 

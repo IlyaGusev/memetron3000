@@ -18,7 +18,7 @@ class ImageRecord(Base):
         String, nullable=True, default="UNDEFINED"
     )
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
-    template_id: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    template_ids: Mapped[Optional[str]] = mapped_column(String, nullable=True)
 
 
 SQL_DATABASE_URL = "sqlite:///./images.db"
