@@ -271,10 +271,20 @@
         let queuePollInterval = null;
         let templatesMap = {};
 
+        // Get base path from current URL (e.g., "/memetron3000/" or "/")
+        const basePath = window.location.pathname.endsWith('/')
+            ? window.location.pathname
+            : window.location.pathname + '/';
+
+        // Helper function to build API URLs
+        function apiUrl(path) {
+            return basePath + path;
+        }
+
         // Load templates on page load
         async function loadTemplates() {
             try {
-                const response = await fetch('/api/v1/templates');
+                const response = await fetch(apiUrl('api/v1/templates'));
                 const templates = await response.json();
                 const select = document.getElementById('template');
 
@@ -294,7 +304,7 @@
         // Update queue size
         async function updateQueueSize() {
             try {
-                const response = await fetch('/api/v1/queue/size');
+                const response = await fetch(apiUrl('api/v1/queue/size'));
                 const data = await response.json();
                 document.getElementById('queueSize').textContent = data.size;
             } catch (error) {
@@ -321,7 +331,7 @@
         // Poll job status
         async function pollJobStatus(jobId) {
             try {
-                const response = await fetch(`/api/v1/job/${jobId}`);
+                const response = await fetch(apiUrl(`api/v1/job/${jobId}`));
                 const job = await response.json();
 
                 updateStatusDisplay(job);
@@ -374,11 +384,12 @@
 
             // Display result or error
             if (job.status === 'completed' && job.result_url) {
+                const imageUrl = basePath + job.result_url;
                 resultContainer.innerHTML = `
                     <h3 style="margin-top: 20px; margin-bottom: 10px;">Result:</h3>
-                    <img src="${job.result_url}" alt="Generated meme" class="result-image">
+                    <img src="${imageUrl}" alt="Generated meme" class="result-image">
                     <p style="margin-top: 10px; text-align: center;">
-                        <a href="${job.result_url}" target="_blank" style="color: #667eea;">Open in new tab</a>
+                        <a href="${imageUrl}" target="_blank" style="color: #667eea;">Open in new tab</a>
                     </p>
                 `;
             } else if (job.status === 'failed' && job.error) {
@@ -415,7 +426,7 @@
                     requestBody.selected_template_id = template;
                 }
 
-                const response = await fetch('/api/v1/predict', {
+                const response = await fetch(apiUrl('api/v1/predict'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

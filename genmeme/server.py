@@ -99,7 +99,7 @@ async def process_queue_worker() -> None:
                         raise
                     traceback.print_exc()
 
-            public_url = f"/output/{response.file_name}"
+            public_url = f"output/{response.file_name}"
 
             logger.info(
                 f'OUTPUT job_id="{job.job_id}" file="{response.file_name}" templates="{",".join(response.template_ids)}"'
@@ -228,7 +228,7 @@ async def health_check() -> Dict[str, Any]:
 APP.mount("/output", StaticFiles(directory=STORAGE_PATH), name="output")
 
 
-def main(host: str = "0.0.0.0", port: int = 8081) -> None:
+def main(host: str = "0.0.0.0", port: int = 8090) -> None:
     # Add filter to uvicorn access logger to exclude polling endpoints
     logging.getLogger("uvicorn.access").addFilter(EndpointFilter())
     uvicorn.run(APP, host=host, port=port)
