@@ -223,12 +223,36 @@
         .footer a:hover {
             opacity: 0.8;
         }
+
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>MEMETRON 3000</h1>
+        </div>
+
+        <div class="nav">
+            <a href="./gallery">View Gallery →</a>
         </div>
 
         <div class="queue-info" id="queueInfo">

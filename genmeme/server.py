@@ -68,6 +68,22 @@ class TemplateInfo(BaseModel):
     description: str
 
 
+class MemeInfo(BaseModel):
+    result_id: str
+    public_url: str
+    query: Optional[str] = None
+    created_at: Optional[datetime.datetime] = None
+    template_ids: Optional[str] = None
+
+
+class GalleryResponse(BaseModel):
+    memes: List[MemeInfo]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
 async def process_queue_worker() -> None:
     while True:
         job = await QUEUE_MANAGER.queue.get()
@@ -211,6 +227,52 @@ async def get_templates() -> List[TemplateInfo]:
     ]
 
 
+@APP.get("/api/v1/gallery", response_model=GalleryResponse)
+async def get_gallery(page: int = 1, page_size: int = 24) -> GalleryResponse:
+    db = SessionLocal()
+    try:
+        # Ensure valid pagination parameters
+        page = max(1, page)
+        page_size = max(1, min(100, page_size))  # Max 100 items per page
+
+        # Get total count
+        total = db.query(ImageRecord).count()
+
+        # Calculate total pages
+        total_pages = (total + page_size - 1) // page_size if total > 0 else 1
+
+        # Get paginated records
+        offset = (page - 1) * page_size
+        records = (
+            db.query(ImageRecord)
+            .order_by(ImageRecord.created_at.desc())
+            .limit(page_size)
+            .offset(offset)
+            .all()
+        )
+
+        memes = [
+            MemeInfo(
+                result_id=r.result_id,
+                public_url=r.public_url,
+                query=r.query,
+                created_at=r.created_at,
+                template_ids=r.template_ids,
+            )
+            for r in records
+        ]
+
+        return GalleryResponse(
+            memes=memes,
+            total=total,
+            page=page,
+            page_size=page_size,
+            total_pages=total_pages,
+        )
+    finally:
+        db.close()
+
+
 @APP.get("/", response_class=HTMLResponse)
 async def root() -> str:
     static_dir = Path(__file__).parent.parent / "static"
@@ -218,6 +280,15 @@ async def root() -> str:
     if index_path.exists():
         return index_path.read_text()
     return "<h1>MEMETRON 3000</h1><p>Frontend not found</p>"
+
+
+@APP.get("/gallery", response_class=HTMLResponse)
+async def gallery() -> str:
+    static_dir = Path(__file__).parent.parent / "static"
+    gallery_path = static_dir / "gallery.html"
+    if gallery_path.exists():
+        return gallery_path.read_text()
+    return "<h1>Gallery</h1><p>Gallery page not found</p>"
 
 
 @APP.get("/health")
