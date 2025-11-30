@@ -262,7 +262,7 @@ async def get_gallery(page: int = 1, page_size: int = 24) -> GalleryResponse:
         offset = (page - 1) * page_size
         records = (
             db.query(ImageRecord)
-            .order_by(ImageRecord.created_at.desc())
+            .order_by(ImageRecord.created_at.asc())
             .limit(page_size)
             .offset(offset)
             .all()
