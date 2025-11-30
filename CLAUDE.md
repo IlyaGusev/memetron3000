@@ -107,6 +107,26 @@ mypy genmeme --strict --explicit-package-bases
 
 Note: Some dependencies (like `fire`) use `# type: ignore` comments where type stubs are unavailable.
 
+## Code Style
+
+### Comments
+- **Do not write obvious code comments.** Code should be self-explanatory through clear variable names and function names.
+- **Only write comments when explaining complex logic** that isn't immediately clear from the code itself.
+- Examples of what NOT to comment:
+  ```python
+  # Bad: obvious comment
+  user_count = len(users)  # Get the count of users
+
+  # Good: self-explanatory code, no comment needed
+  user_count = len(users)
+  ```
+- Examples of when TO comment:
+  ```python
+  # Good: explains non-obvious algorithm or business logic
+  # Use binary search because the list is pre-sorted by timestamp
+  index = bisect_left(timestamps, target_time)
+  ```
+
 ## Russian Language Context
 
 This project generates memes in Russian. The templates in `templates.json` contain:

@@ -246,7 +246,7 @@
         </div>
 
         <div class="nav">
-            <a href="./">← Back to Generator</a>
+            <a href="#" id="backLink">← Back to Generator</a>
         </div>
 
         <div id="loading" class="loading">Loading gallery...</div>
@@ -270,19 +270,18 @@
     </div>
 
     <script>
-        // Get base path from current URL
         const basePath = window.location.pathname.endsWith('/')
             ? window.location.pathname.replace(/gallery\/$/, '')
             : window.location.pathname.replace(/\/gallery$/, '') + '/';
 
-        // Helper function to build API URLs
         function apiUrl(path) {
             return basePath + path;
         }
 
+        document.getElementById('backLink').href = basePath;
+
         let currentPage = 1;
 
-        // Load gallery
         async function loadGallery(page = 1) {
             const loading = document.getElementById('loading');
             const gallery = document.getElementById('gallery');
@@ -324,12 +323,10 @@
                     `;
                 }).join('');
 
-                // Show pagination if there's more than one page
                 if (data.total_pages > 1) {
                     renderPagination(data.page, data.total_pages);
                 }
 
-                // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
             } catch (error) {
@@ -338,39 +335,27 @@
             }
         }
 
-        // Render pagination controls
         function renderPagination(currentPage, totalPages) {
             const pagination = document.getElementById('pagination');
             pagination.style.display = 'flex';
 
             let html = '';
 
-            // First page button
             html += `<button onclick="loadGallery(1)" ${currentPage === 1 ? 'disabled' : ''}>First</button>`;
-
-            // Previous page button
             html += `<button onclick="loadGallery(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>`;
-
-            // Page info
             html += `<span class="page-info">Page ${currentPage} of ${totalPages}</span>`;
-
-            // Next page button
             html += `<button onclick="loadGallery(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
-
-            // Last page button
             html += `<button onclick="loadGallery(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>Last</button>`;
 
             pagination.innerHTML = html;
         }
 
-        // Escape HTML to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Modal functionality
         const modal = document.getElementById('modal');
         const modalImage = document.getElementById('modal-image');
         const closeBtn = document.getElementsByClassName('close')[0];
@@ -390,7 +375,6 @@
             }
         }
 
-        // Load gallery on page load
         loadGallery();
     </script>
 </body>

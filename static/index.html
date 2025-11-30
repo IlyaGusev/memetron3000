@@ -252,7 +252,7 @@
         </div>
 
         <div class="nav">
-            <a href="./gallery">View Gallery →</a>
+            <a href="#" id="galleryLink">View Gallery →</a>
         </div>
 
         <div class="queue-info" id="queueInfo">
@@ -295,24 +295,22 @@
         let queuePollInterval = null;
         let templatesMap = {};
 
-        // Get base path from current URL (e.g., "/memetron3000/" or "/")
         const basePath = window.location.pathname.endsWith('/')
             ? window.location.pathname
             : window.location.pathname + '/';
 
-        // Helper function to build API URLs
         function apiUrl(path) {
             return basePath + path;
         }
 
-        // Load templates on page load
+        document.getElementById('galleryLink').href = basePath + 'gallery';
+
         async function loadTemplates() {
             try {
                 const response = await fetch(apiUrl('api/v1/templates'));
                 const templates = await response.json();
                 const select = document.getElementById('template');
 
-                // Store templates in a map for easy lookup
                 templates.forEach(template => {
                     templatesMap[template.id] = template;
                     const option = document.createElement('option');
@@ -325,7 +323,6 @@
             }
         }
 
-        // Update queue size
         async function updateQueueSize() {
             try {
                 const response = await fetch(apiUrl('api/v1/queue/size'));
@@ -336,7 +333,6 @@
             }
         }
 
-        // Start frequent queue polling
         function startQueuePolling() {
             if (queuePollInterval) {
                 clearInterval(queuePollInterval);
@@ -344,7 +340,6 @@
             queuePollInterval = setInterval(updateQueueSize, 3000);
         }
 
-        // Stop frequent queue polling
         function stopQueuePolling() {
             if (queuePollInterval) {
                 clearInterval(queuePollInterval);
@@ -352,7 +347,6 @@
             }
         }
 
-        // Poll job status
         async function pollJobStatus(jobId) {
             try {
                 const response = await fetch(apiUrl(`api/v1/job/${jobId}`));
@@ -371,7 +365,6 @@
             }
         }
 
-        // Update status display
         function updateStatusDisplay(job) {
             const statusInfo = document.getElementById('statusInfo');
             const resultContainer = document.getElementById('resultContainer');
@@ -382,7 +375,6 @@
                 <p><strong>Position in queue:</strong> ${job.position}</p>
             `;
 
-            // Display selected template
             if (job.selected_template_id) {
                 const template = templatesMap[job.selected_template_id];
                 if (template) {
@@ -406,7 +398,6 @@
 
             statusInfo.innerHTML = statusHtml;
 
-            // Display result or error
             if (job.status === 'completed' && job.result_url) {
                 const imageUrl = basePath + job.result_url;
                 resultContainer.innerHTML = `
@@ -433,7 +424,6 @@
             }
         }
 
-        // Handle form submission
         document.getElementById('memeForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -461,14 +451,11 @@
                 const data = await response.json();
                 currentJobId = data.job_id;
 
-                // Update queue size immediately
                 updateQueueSize();
 
-                // Show status card
                 document.getElementById('statusCard').classList.add('active');
                 document.getElementById('statusCard').scrollIntoView({ behavior: 'smooth' });
 
-                // Start polling
                 if (pollInterval) {
                     clearInterval(pollInterval);
                 }
@@ -485,7 +472,6 @@
             }
         });
 
-        // Initialize
         loadTemplates();
         updateQueueSize();
     </script>
