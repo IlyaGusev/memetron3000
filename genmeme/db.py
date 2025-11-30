@@ -13,6 +13,7 @@ class ImageRecord(Base):
     __tablename__ = "images"
     result_id: Mapped[str] = mapped_column(String, primary_key=True)
     public_url: Mapped[str]
+    thumbnail_url: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     query: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     label: Mapped[Optional[str]] = mapped_column(
         String, nullable=True, default="UNDEFINED"

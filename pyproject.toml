@@ -21,12 +21,12 @@ dependencies = [
     "types-requests>=2.32.0",
     "tqdm>=4.66.0",
     "types-tqdm>=4.66.0",
-    "google-genai>=1.52.0",
     "fire>=0.7.1",
     "moviepy==1.0.3",
     "sanic>=25.3.0",
     "sanic-ext>=24.12.0",
     "openai>=2.8.1",
+    "pillow>=10.0.0",
 ]
 
 [tool.flake8]

@@ -20,6 +20,7 @@ from genmeme.files import STORAGE_PATH, PROMPT_PATH, TEMPLATES_PATH
 from genmeme.gen import generate_meme
 from genmeme.db import ImageRecord, SessionLocal
 from genmeme.queue import QueueManager, JobStatus
+from genmeme.thumbnails import create_thumbnail
 
 
 logger = logging.getLogger("uvicorn")
@@ -71,6 +72,7 @@ class TemplateInfo(BaseModel):
 class MemeInfo(BaseModel):
     result_id: str
     public_url: str
+    thumbnail_url: Optional[str] = None
     query: Optional[str] = None
     created_at: Optional[datetime.datetime] = None
     template_ids: Optional[str] = None
@@ -117,6 +119,20 @@ async def process_queue_worker() -> None:
 
             public_url = f"output/{response.file_name}"
 
+            # Generate thumbnail
+            image_path = Path(STORAGE_PATH) / response.file_name
+            thumbnail_dir = Path(STORAGE_PATH) / "thumbnails"
+            thumbnail_dir.mkdir(exist_ok=True)
+            thumbnail_name = response.file_name
+            thumbnail_path = thumbnail_dir / thumbnail_name
+            thumbnail_url = f"output/thumbnails/{thumbnail_name}"
+
+            try:
+                create_thumbnail(image_path, thumbnail_path)
+            except Exception as e:
+                logger.error(f"Failed to create thumbnail: {e}")
+                thumbnail_url = public_url
+
             logger.info(
                 f'OUTPUT job_id="{job.job_id}" file="{response.file_name}" templates="{",".join(response.template_ids)}"'
             )
@@ -125,6 +141,7 @@ async def process_queue_worker() -> None:
             db_record = ImageRecord(
                 result_id=response.file_name.split(".")[0],
                 public_url=public_url,
+                thumbnail_url=thumbnail_url,
                 query=job.prompt,
                 created_at=datetime.datetime.now(datetime.UTC),
                 template_ids=",".join(response.template_ids),
@@ -255,6 +272,7 @@ async def get_gallery(page: int = 1, page_size: int = 24) -> GalleryResponse:
             MemeInfo(
                 result_id=r.result_id,
                 public_url=r.public_url,
+                thumbnail_url=r.thumbnail_url or r.public_url,
                 query=r.query,
                 created_at=r.created_at,
                 template_ids=r.template_ids,
