@@ -7,19 +7,23 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout github repo
       uses: actions/checkout@v3
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v2
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: "3.11"
+        version: "0.7.4"
+    - name: "Set up Python"
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: "pyproject.toml"
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install flake8 black pytest mypy
-        pip install -r requirements.txt
+        uv venv .venv
+        source .venv/bin/activate
+        uv sync
     - name: Lint and check style
       run: |
         make validate
