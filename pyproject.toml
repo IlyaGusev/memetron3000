@@ -27,6 +27,7 @@ dependencies = [
     "sanic-ext>=24.12.0",
     "openai>=2.8.1",
     "pillow>=10.0.0",
+    "dotenv==0.9.9",
 ]
 
 [dependency-groups]
