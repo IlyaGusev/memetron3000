@@ -5,7 +5,7 @@ An automatic Russian meme generator powered by vision-capable language models. M
 ## Features
 
 - **AI-Powered Generation**: Uses Google's Gemini 3 Pro Image via OpenRouter to generate memes
-- **Template-Based**: 100+ Russian meme templates with descriptions and examples
+- **Template-Based**: 20+ Russian meme templates with descriptions and examples
 - **Queue System**: Async job queue for handling multiple generation requests
 - **Gallery**: Browse all previously generated memes with pagination
 - **Thumbnail Generation**: Automatic thumbnail creation for fast loading
