@@ -86,6 +86,10 @@ class GalleryResponse(BaseModel):
     total_pages: int
 
 
+class ConfigResponse(BaseModel):
+    generation_enabled: bool
+
+
 async def process_queue_worker() -> None:
     while True:
         job = await QUEUE_MANAGER.queue.get()
@@ -191,6 +195,11 @@ def get_base_url(request: Request) -> str:
 
 @APP.post("/api/v1/predict", response_model=PredictResponse)
 async def predict(request: PredictRequest, req: Request) -> PredictResponse:
+    generation_enabled = os.getenv("ENABLE_GENERATION", "false").lower() == "true"
+    if not generation_enabled:
+        raise HTTPException(
+            status_code=503, detail="Meme generation is currently disabled"
+        )
     job = QUEUE_MANAGER.create_job(request.prompt, request.selected_template_id)
     position = await QUEUE_MANAGER.enqueue(job)
     logger.info(
@@ -307,6 +316,12 @@ async def gallery() -> str:
     if gallery_path.exists():
         return gallery_path.read_text()
     return "<h1>Gallery</h1><p>Gallery page not found</p>"
+
+
+@APP.get("/api/v1/config", response_model=ConfigResponse)
+async def get_config() -> ConfigResponse:
+    generation_enabled = os.getenv("ENABLE_GENERATION", "false").lower() == "true"
+    return ConfigResponse(generation_enabled=generation_enabled)
 
 
 @APP.get("/health")

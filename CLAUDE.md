@@ -97,6 +97,7 @@ Environment variables:
 - `OPENROUTER_API_KEY` - Required for LLM API calls
 - `PROMPT_PATH` - Override default prompt template path
 - `TEMPLATES_PATH` - Override default templates.json path
+- `ENABLE_GENERATION` - Enable/disable meme generation (default: "false"). Set to "true" to allow meme generation. When disabled, the frontend shows a budget limit message instead of the generation form.
 
 ## Type Checking
 

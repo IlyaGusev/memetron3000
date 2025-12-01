@@ -259,7 +259,17 @@
             Queue size: <strong id="queueSize">0</strong>
         </div>
 
-        <div class="card">
+        <div class="card" id="budgetMessage" style="display: none;">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Budget Limit Reached</h2>
+            <p style="font-size: 1.1em; line-height: 1.6; color: #555; margin-bottom: 15px;">
+                The $50 budget for this project has been reached. Meme generation is temporarily disabled.
+            </p>
+            <p style="font-size: 1em; color: #666;">
+                You can still browse the <a href="#" id="galleryLinkBudget" style="color: #667eea; font-weight: 600;">gallery</a> to see all previously generated memes.
+            </p>
+        </div>
+
+        <div class="card" id="generationCard">
             <h2 style="margin-bottom: 20px;">Generate Meme</h2>
             <form id="memeForm">
                 <div class="form-group">
@@ -304,6 +314,29 @@
         }
 
         document.getElementById('galleryLink').href = basePath + 'gallery';
+        document.getElementById('galleryLinkBudget').href = basePath + 'gallery';
+
+        async function checkGenerationEnabled() {
+            try {
+                const response = await fetch(apiUrl('api/v1/config'));
+                const config = await response.json();
+
+                if (config.generation_enabled) {
+                    document.getElementById('generationCard').style.display = 'block';
+                    document.getElementById('budgetMessage').style.display = 'none';
+                    document.getElementById('queueInfo').style.display = 'block';
+                } else {
+                    document.getElementById('generationCard').style.display = 'none';
+                    document.getElementById('budgetMessage').style.display = 'block';
+                    document.getElementById('queueInfo').style.display = 'none';
+                }
+
+                return config.generation_enabled;
+            } catch (error) {
+                console.error('Error checking generation status:', error);
+                return true;
+            }
+        }
 
         async function loadTemplates() {
             try {
@@ -472,6 +505,7 @@
             }
         });
 
+        checkGenerationEnabled();
         loadTemplates();
         updateQueueSize();
     </script>
