@@ -330,6 +330,11 @@ async def health_check() -> Dict[str, Any]:
 
 
 APP.mount("/output", StaticFiles(directory=STORAGE_PATH), name="output")
+APP.mount(
+    "/static",
+    StaticFiles(directory=str(Path(__file__).parent.parent / "static")),
+    name="static",
+)
 
 
 def main(host: str = "0.0.0.0", port: int = 8090) -> None:

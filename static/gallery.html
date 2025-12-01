@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - MEMETRON 3000</title>
+    <link rel="icon" type="image/png" href="" id="favicon">
     <style>
         * {
             margin: 0;
@@ -278,6 +279,7 @@
             return basePath + path;
         }
 
+        document.getElementById('favicon').href = basePath + 'static/favicon.png';
         document.getElementById('backLink').href = basePath;
 
         let currentPage = 1;
